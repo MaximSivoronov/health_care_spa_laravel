@@ -35,6 +35,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "login",
   data: function data() {
@@ -77,7 +79,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".login-card[data-v-172b28a4] {\n  max-width: 300px;\n  min-width: 300px;\n}\n.login-button[data-v-172b28a4] {\n  width: 30%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".login-card[data-v-172b28a4] {\n  max-width: 500px;\n  min-width: 500px;\n}\n.login-button[data-v-172b28a4] {\n  width: 30%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -659,7 +661,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header text-center" }, [
+    return _c("div", { staticClass: "card-header text-center pt-3" }, [
       _c("h2", [_vm._v("Login")]),
     ])
   },

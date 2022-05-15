@@ -5377,6 +5377,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+// TODO: delete get router.
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index"
 });
@@ -28032,7 +28033,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: { name: "user.register" } } }, [
-        _vm._v("Register"),
+        _vm._v("Sign up"),
       ]),
       _vm._v(" "),
       _c("router-view"),
