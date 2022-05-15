@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link :to="{ name: 'get' }">Get</router-link>
         <router-link :to="{ name: 'user.login' }">Login</router-link>
         <router-link :to="{ name: 'user.register' }">Register</router-link>
         <router-view></router-view>

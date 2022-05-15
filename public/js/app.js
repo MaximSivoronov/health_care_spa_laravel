@@ -5376,6 +5376,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index"
 });
@@ -5429,6 +5430,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5475,6 +5477,12 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
       return __webpack_require__.e(/*! import() */ "resources_js_components_register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/register */ "./resources/js/components/register.vue"));
     },
     name: 'user.register'
+  }, {
+    path: '/get',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Get_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Get */ "./resources/js/components/Get.vue"));
+    },
+    name: 'get'
   }]
 }));
 
@@ -28017,6 +28025,8 @@ var render = function () {
   return _c(
     "div",
     [
+      _c("router-link", { attrs: { to: { name: "get" } } }, [_vm._v("Get")]),
+      _vm._v(" "),
       _c("router-link", { attrs: { to: { name: "user.login" } } }, [
         _vm._v("Login"),
       ]),
@@ -43426,6 +43436,18 @@ Vue.compile = compileToFunctions;
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -43456,7 +43478,7 @@ Vue.compile = compileToFunctions;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_login_vue":1,"resources_js_components_register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_login_vue":1,"resources_js_components_register_vue":1,"resources_js_components_Get_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
@@ -43648,6 +43670,11 @@ Vue.compile = compileToFunctions;
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
