@@ -5382,15 +5382,31 @@ __webpack_require__.r(__webpack_exports__);
 // TODO: delete get router.
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
+  data: function data() {
+    return {
+      token: ''
+    };
+  },
+  mounted: function mounted() {
+    this.getToken();
+  },
+  updated: function updated() {
+    this.getToken();
+  },
   methods: {
     logout: function logout() {
       var _this = this;
 
       axios.post('/logout').then(function (r) {
+        localStorage.removeItem('x-xsrf-token');
+
         _this.$router.push({
           name: 'user.login'
         });
       });
+    },
+    getToken: function getToken() {
+      this.token = localStorage.getItem('x-xsrf-token');
     }
   }
 });
@@ -5428,7 +5444,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
@@ -5445,6 +5465,19 @@ try {
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
+window.axios.interceptors.response.use({}, function (err) {
+  if (err.response.status === 401 || err.response.status === 419) {
+    var token = localStorage.getItem('x-xsrf-token');
+
+    if (token) {
+      localStorage.removeItem('x-xsrf-token');
+    }
+
+    _router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+      name: 'user.login'
+    });
+  }
+});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5477,7 +5510,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
     path: '/user/login',
@@ -5504,7 +5537,26 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
     },
     name: 'user.personal'
   }]
-}));
+}); // router.beforeEach((to, from, next) => {
+//     const token = localStorage.getItem('x-xsrf-token');
+//
+//     if (!token) {
+//         if (to.name === 'user.login' || to.name === 'user.register') {
+//             return next();
+//         }
+//
+//         return next({ name: 'user.login' });
+//     }
+//     else {
+//         if (to.name === 'user.login' || to.name === 'user.register') {
+//             return next({ name: 'user.personal' });
+//         }
+//
+//         return next();
+//     }
+// });
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),
 
@@ -28045,33 +28097,43 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("router-link", { attrs: { to: { name: "get" } } }, [_vm._v("Get")]),
+      _vm.token
+        ? _c("router-link", { attrs: { to: { name: "get" } } }, [_vm._v("Get")])
+        : _vm._e(),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "user.personal" } } }, [
-        _vm._v("Personal"),
-      ]),
+      _vm.token
+        ? _c("router-link", { attrs: { to: { name: "user.personal" } } }, [
+            _vm._v("Personal"),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "user.login" } } }, [
-        _vm._v("Login"),
-      ]),
+      !_vm.token
+        ? _c("router-link", { attrs: { to: { name: "user.login" } } }, [
+            _vm._v("Login"),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "user.register" } } }, [
-        _vm._v("Sign up"),
-      ]),
+      !_vm.token
+        ? _c("router-link", { attrs: { to: { name: "user.register" } } }, [
+            _vm._v("Sign up"),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: { href: "#" },
-          on: {
-            click: function ($event) {
-              $event.preventDefault()
-              return _vm.logout.apply(null, arguments)
+      _vm.token
+        ? _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function ($event) {
+                  $event.preventDefault()
+                  return _vm.logout.apply(null, arguments)
+                },
+              },
             },
-          },
-        },
-        [_vm._v("Logout")]
-      ),
+            [_vm._v("Logout")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("router-view"),
     ],

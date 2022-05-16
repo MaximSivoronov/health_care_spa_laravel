@@ -16,7 +16,7 @@ export default {
     methods: {
         get() {
             axios.get('/api/get').then(r => {
-                console.log(r)
+                console.log(r);
             });
         },
     },
