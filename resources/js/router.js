@@ -19,5 +19,9 @@ export default new VueRouter({
             path: '/get', component: () => import('./components/Get'),
             name: 'get',
         },
+        {
+            path: '/user/personal', component: () => import('./components/personal'),
+            name: 'user.personal',
+        },
     ]
 });
