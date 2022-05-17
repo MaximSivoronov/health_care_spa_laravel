@@ -63,9 +63,11 @@ __webpack_require__.r(__webpack_exports__);
           email: _this.email,
           password: _this.password
         }).then(function (res) {
-          _this.$store.dispatch('getUserRole');
+          // Store user role into vuex.
+          _this.$store.dispatch('getUserRole'); // Set token.
 
-          localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']);
+
+          localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']); // Redirect to user personal page.
 
           _this.$router.push({
             name: 'user.personal'

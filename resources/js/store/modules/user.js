@@ -16,7 +16,7 @@ const actions = {
     getUserRole({state, commit, dispatch}) {
         axios.get('/api/user')
             .then(r => {
-                commit('setUserRole', r.data.role);
+                commit('setUserRole', r.data);
             });
     },
 

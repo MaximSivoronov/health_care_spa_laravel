@@ -5395,9 +5395,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/logout').then(function (r) {
-        localStorage.removeItem('x-xsrf-token');
+        // Delete token.
+        localStorage.removeItem('x-xsrf-token'); // Reset user role in vuex.
 
-        _this.$store.dispatch('setUserRole', '');
+        _this.$store.dispatch('setUserRole', ''); // Redirect to login page.
+
 
         _this.$router.push({
           name: 'user.login'
@@ -5531,7 +5533,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   }]
 });
 router.beforeEach(function (to, from, next) {
-  var token = localStorage.getItem('x-xsrf-token');
+  var token = localStorage.getItem('x-xsrf-token'); // Debug logs.
+
   console.log(_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters);
   console.log(_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.userRole);
 
@@ -5613,7 +5616,7 @@ var actions = {
         commit = _ref.commit,
         dispatch = _ref.dispatch;
     axios.get('/api/user').then(function (r) {
-      commit('setUserRole', r.data.role);
+      commit('setUserRole', r.data);
     });
   },
   setUserRole: function setUserRole(_ref2, userRole) {
