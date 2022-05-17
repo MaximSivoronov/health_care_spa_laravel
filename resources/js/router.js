@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from "./store";
 
 Vue.use(VueRouter);
 
@@ -15,11 +16,14 @@ const router = new VueRouter({
             path: '/user/register', component: () => import('./components/register'),
             name: 'user.register',
         },
-    ]
+    ],
 });
 
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x-xsrf-token');
+
+    console.log(store.getters);
+    console.log(store.getters.userRole);
 
     if (!token) {
         if (to.name === 'user.login' || to.name === 'user.register') {

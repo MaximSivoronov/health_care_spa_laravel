@@ -30,7 +30,8 @@ export default {
             axios.post('/logout')
                 .then(r => {
                     localStorage.removeItem('x-xsrf-token');
-                    this.$router.push({ name: 'user.login' });
+                    this.$store.dispatch('setUserRole', '');
+                    this.$router.push({name: 'user.login'});
                 });
         },
 

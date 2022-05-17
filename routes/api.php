@@ -19,6 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    // TODO: route for debug purposes, delete route.
-    Route::get('/get', [\App\Http\Controllers\GetTestController::class, '__invoke']);
+    Route::get('/user', [\App\Http\Controllers\UserController::class, 'getAuthenticatedUser']);
 });

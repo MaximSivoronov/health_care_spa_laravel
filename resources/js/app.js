@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import store from "./store";
 import router from './router';
 
 import index from './components/index';
@@ -12,5 +13,5 @@ const app = new Vue({
         index,
     },
 
-    router,
+    router, store,
 });

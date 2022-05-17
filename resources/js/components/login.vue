@@ -49,6 +49,7 @@ export default {
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/login', {email: this.email, password: this.password})
                     .then(res => {
+                        this.$store.dispatch('getUserRole');
                         localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']);
                         this.$router.push({ name: 'user.personal' });
                     });
