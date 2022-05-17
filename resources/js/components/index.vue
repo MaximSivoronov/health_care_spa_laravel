@@ -1,7 +1,5 @@
 <template>
     <div>
-        <router-link v-if="token" :to="{ name: 'get' }">Get</router-link>
-        <router-link v-if="token" :to="{ name: 'user.personal' }">Personal</router-link>
         <router-link v-if="!token" :to="{ name: 'user.login' }">Login</router-link>
         <router-link v-if="!token" :to="{ name: 'user.register' }">Sign up</router-link>
         <a v-if="token" @click.prevent="logout" href="#">Logout</a>
@@ -10,7 +8,6 @@
 </template>
 
 <script>
-// TODO: delete get router.
 export default {
     name: "index",
 
