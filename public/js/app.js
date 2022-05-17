@@ -5537,25 +5537,28 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     },
     name: 'user.personal'
   }]
-}); // router.beforeEach((to, from, next) => {
-//     const token = localStorage.getItem('x-xsrf-token');
-//
-//     if (!token) {
-//         if (to.name === 'user.login' || to.name === 'user.register') {
-//             return next();
-//         }
-//
-//         return next({ name: 'user.login' });
-//     }
-//     else {
-//         if (to.name === 'user.login' || to.name === 'user.register') {
-//             return next({ name: 'user.personal' });
-//         }
-//
-//         return next();
-//     }
-// });
+});
+router.beforeEach(function (to, from, next) {
+  var token = localStorage.getItem('x-xsrf-token');
 
+  if (!token) {
+    if (to.name === 'user.login' || to.name === 'user.register') {
+      return next();
+    }
+
+    return next({
+      name: 'user.login'
+    });
+  } else {
+    if (to.name === 'user.login' || to.name === 'user.register') {
+      return next({
+        name: 'user.personal'
+      });
+    }
+
+    return next();
+  }
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),
