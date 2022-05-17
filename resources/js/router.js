@@ -22,6 +22,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x-xsrf-token');
 
+    // Debug logs.
     console.log(store.getters);
     console.log(store.getters.userRole);
 

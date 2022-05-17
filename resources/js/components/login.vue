@@ -49,8 +49,13 @@ export default {
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/login', {email: this.email, password: this.password})
                     .then(res => {
+                        // Store user role into vuex.
                         this.$store.dispatch('getUserRole');
+
+                        // Set token.
                         localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']);
+
+                        // Redirect to user personal page.
                         this.$router.push({ name: 'user.personal' });
                     });
             });

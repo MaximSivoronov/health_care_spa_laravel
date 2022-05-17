@@ -29,8 +29,13 @@ export default {
         logout() {
             axios.post('/logout')
                 .then(r => {
+                    // Delete token.
                     localStorage.removeItem('x-xsrf-token');
+
+                    // Reset user role in vuex.
                     this.$store.dispatch('setUserRole', '');
+
+                    // Redirect to login page.
                     this.$router.push({name: 'user.login'});
                 });
         },
