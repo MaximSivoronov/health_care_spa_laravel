@@ -3,7 +3,7 @@
         <router-link :to="{ name: 'debug/get' }">Debug get</router-link>
         <router-link v-if="!token" :to="{ name: 'user.login' }">Login</router-link>
         <router-link v-if="!token" :to="{ name: 'user.register' }">Sign up</router-link>
-        <router-link v-if="userRole" :to="{ name: 'user.personal' }">Personal</router-link>
+        <router-link v-if="user" :to="{ name: 'user.personal' }">Personal</router-link>
         <a v-if="token" @click.prevent="logout" href="#">Logout</a>
         <router-view></router-view>
     </div>
@@ -16,18 +16,18 @@ export default {
     data() {
         return {
             token: '',
-            userRole: this.$store.getters.userRole,
+            user: this.$store.getters.user,
         }
     },
 
     mounted() {
         this.getToken();
-        this.getUserRole();
+        this.getUser();
     },
 
     updated() {
         this.getToken();
-        this.getUserRole();
+        this.getUser();
     },
 
     methods: {
@@ -38,7 +38,7 @@ export default {
                     localStorage.removeItem('x-xsrf-token');
 
                     // Reset user role in vuex.
-                    this.$store.dispatch('setUserRole', '');
+                    this.$store.dispatch('setUser', '');
 
                     // Redirect to login page.
                     this.$router.push({name: 'user.login'});
@@ -49,9 +49,9 @@ export default {
             this.token = localStorage.getItem('x-xsrf-token');
         },
 
-        getUserRole() {
+        getUser() {
             setTimeout(() => {
-                this.userRole = this.$store.getters.userRole;
+                this.user = this.$store.getters.user;
             }, 300);
         }
     },

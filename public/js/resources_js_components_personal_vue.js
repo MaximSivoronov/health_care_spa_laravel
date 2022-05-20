@@ -40,7 +40,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getUserRole: function getUserRole() {
-      this.userRole = this.$store.getters.userRole;
+      this.userRole = this.$store.getters.user.role;
     }
   }
 });

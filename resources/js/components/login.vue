@@ -50,7 +50,7 @@ export default {
                 axios.post('/login', {email: this.email, password: this.password})
                     .then(res => {
                         // Store user role into vuex.
-                        this.$store.dispatch('getUserRole');
+                        this.$store.dispatch('getUser');
 
                         // Set token.
                         localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']);

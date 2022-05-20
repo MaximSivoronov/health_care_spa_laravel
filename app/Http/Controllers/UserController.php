@@ -8,6 +8,6 @@ class UserController extends Controller
 {
     public function getAuthenticatedUser()
     {
-        return response()->json(auth()->user()->role);
+        return response()->json(auth()->user());
     }
 }

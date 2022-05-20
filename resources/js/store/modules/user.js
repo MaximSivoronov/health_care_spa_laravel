@@ -1,26 +1,26 @@
 const state = {
-    userRole: '',
+    user: '',
 }
 
 const getters = {
-    userRole: () => state.userRole,
+    user: () => state.user,
 }
 
 const mutations = {
-    setUserRole(state, role) {
-        state.userRole = role;
+    setUserRole(state, user) {
+        state.user = user;
     }
 }
 
 const actions = {
-    getUserRole({state, commit, dispatch}) {
+    getUser({state, commit, dispatch}) {
         axios.get('/api/user')
             .then(r => {
                 commit('setUserRole', r.data);
             });
     },
 
-    setUserRole({state, commit, dispatch}, userRole) {
+    setUser({state, commit, dispatch}, userRole) {
         commit('setUserRole', userRole);
     },
 }

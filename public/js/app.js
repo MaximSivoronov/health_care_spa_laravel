@@ -5384,16 +5384,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       token: '',
-      userRole: this.$store.getters.userRole
+      user: this.$store.getters.user
     };
   },
   mounted: function mounted() {
     this.getToken();
-    this.getUserRole();
+    this.getUser();
   },
   updated: function updated() {
     this.getToken();
-    this.getUserRole();
+    this.getUser();
   },
   methods: {
     logout: function logout() {
@@ -5403,7 +5403,7 @@ __webpack_require__.r(__webpack_exports__);
         // Delete token.
         localStorage.removeItem('x-xsrf-token'); // Reset user role in vuex.
 
-        _this.$store.dispatch('setUserRole', ''); // Redirect to login page.
+        _this.$store.dispatch('setUser', ''); // Redirect to login page.
 
 
         _this.$router.push({
@@ -5414,11 +5414,11 @@ __webpack_require__.r(__webpack_exports__);
     getToken: function getToken() {
       this.token = localStorage.getItem('x-xsrf-token');
     },
-    getUserRole: function getUserRole() {
+    getUser: function getUser() {
       var _this2 = this;
 
       setTimeout(function () {
-        _this2.userRole = _this2.$store.getters.userRole;
+        _this2.user = _this2.$store.getters.user;
       }, 300);
     }
   }
@@ -5558,10 +5558,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
 });
 router.beforeEach(function (to, from, next) {
   var token = localStorage.getItem('x-xsrf-token');
-  var userRole = _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.userRole; // Debug logs.
+  var user = _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.user; // Debug logs.
 
   console.log(token);
-  console.log(userRole);
+  console.log(user);
 
   if (!token) {
     if (to.name === 'user.login' || to.name === 'user.register') {
@@ -5623,20 +5623,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var state = {
-  userRole: ''
+  user: ''
 };
 var getters = {
-  userRole: function userRole() {
-    return state.userRole;
+  user: function user() {
+    return state.user;
   }
 };
 var mutations = {
-  setUserRole: function setUserRole(state, role) {
-    state.userRole = role;
+  setUserRole: function setUserRole(state, user) {
+    state.user = user;
   }
 };
 var actions = {
-  getUserRole: function getUserRole(_ref) {
+  getUser: function getUser(_ref) {
     var state = _ref.state,
         commit = _ref.commit,
         dispatch = _ref.dispatch;
@@ -5644,7 +5644,7 @@ var actions = {
       commit('setUserRole', r.data);
     });
   },
-  setUserRole: function setUserRole(_ref2, userRole) {
+  setUser: function setUser(_ref2, userRole) {
     var state = _ref2.state,
         commit = _ref2.commit,
         dispatch = _ref2.dispatch;
@@ -28213,7 +28213,7 @@ var render = function () {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm.userRole
+      _vm.user
         ? _c("router-link", { attrs: { to: { name: "user.personal" } } }, [
             _vm._v("Personal"),
           ])

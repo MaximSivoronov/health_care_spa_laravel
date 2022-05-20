@@ -31,7 +31,7 @@ export default {
 
     methods: {
         getUserRole() {
-            this.userRole = this.$store.getters.userRole;
+            this.userRole = this.$store.getters.user.role;
         },
     },
 }
