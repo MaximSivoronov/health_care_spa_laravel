@@ -56,7 +56,9 @@ export default {
                         localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']);
 
                         // Redirect to user personal page.
-                        this.$router.push({ name: 'user.personal' });
+                        setTimeout(() => {
+                            this.$router.push({name: 'user.personal'});
+                        }, 300);
                     });
             });
         },

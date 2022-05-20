@@ -9,6 +9,10 @@ const router = new VueRouter({
 
     routes: [
         {
+            path: '/debug/get', component: () => import('./components/debug/get'),
+            name: 'debug/get',
+        },
+        {
             path: '/user/login', component: () => import('./components/login'),
             name: 'user.login',
         },
@@ -16,26 +20,30 @@ const router = new VueRouter({
             path: '/user/register', component: () => import('./components/register'),
             name: 'user.register',
         },
+        {
+            path: '/user/personal', component: () => import('./components/personal'),
+            name: 'user.personal',
+        },
     ],
 });
 
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x-xsrf-token');
+    let userRole = store.getters.userRole;
 
     // Debug logs.
-    console.log(store.getters);
-    console.log(store.getters.userRole);
+    console.log(token);
+    console.log(userRole);
 
     if (!token) {
         if (to.name === 'user.login' || to.name === 'user.register') {
             return next();
         }
 
-        return next({ name: 'user.login' });
-    }
-    else {
+        return next({name: 'user.login'});
+    } else {
         if (to.name === 'user.login' || to.name === 'user.register') {
-            return next({ name: 'user.personal' });
+            return next({name: 'user.personal'});
         }
 
         return next();

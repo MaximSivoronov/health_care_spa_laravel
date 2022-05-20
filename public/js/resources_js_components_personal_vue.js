@@ -17,9 +17,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// TODO: delete component.
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "personal"
+  name: "personal",
+  data: function data() {
+    return {
+      userRole: ''
+    };
+  },
+  mounted: function mounted() {
+    this.getUserRole();
+  },
+  methods: {
+    getUserRole: function getUserRole() {
+      this.userRole = this.$store.getters.userRole;
+    }
+  }
 });
 
 /***/ }),
@@ -108,7 +131,31 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    personal test page.\n")])
+  return _c("div", [
+    this.userRole === "client"
+      ? _c("div", [
+          _c("h2", [_vm._v("Personal " + _vm._s(this.userRole) + " page.")]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Client section")]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Client section")]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Client section")]),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    this.userRole === "admin"
+      ? _c("div", [
+          _c("h2", [_vm._v("Personal " + _vm._s(this.userRole) + " page.")]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Admin section")]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Admin section")]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Admin section")]),
+        ])
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

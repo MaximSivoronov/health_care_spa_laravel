@@ -69,9 +69,11 @@ __webpack_require__.r(__webpack_exports__);
 
           localStorage.setItem('x-xsrf-token', res.config.headers['X-XSRF-TOKEN']); // Redirect to user personal page.
 
-          _this.$router.push({
-            name: 'user.personal'
-          });
+          setTimeout(function () {
+            _this.$router.push({
+              name: 'user.personal'
+            });
+          }, 300);
         });
       });
     }

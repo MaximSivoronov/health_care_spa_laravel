@@ -5377,18 +5377,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
   data: function data() {
     return {
-      token: ''
+      token: '',
+      userRole: this.$store.getters.userRole
     };
   },
   mounted: function mounted() {
     this.getToken();
+    this.getUserRole();
   },
   updated: function updated() {
     this.getToken();
+    this.getUserRole();
   },
   methods: {
     logout: function logout() {
@@ -5408,6 +5413,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     getToken: function getToken() {
       this.token = localStorage.getItem('x-xsrf-token');
+    },
+    getUserRole: function getUserRole() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.userRole = _this2.$store.getters.userRole;
+      }, 300);
     }
   }
 });
@@ -5519,6 +5531,12 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   mode: 'history',
   routes: [{
+    path: '/debug/get',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_debug_get_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/debug/get */ "./resources/js/components/debug/get.vue"));
+    },
+    name: 'debug/get'
+  }, {
     path: '/user/login',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/login */ "./resources/js/components/login.vue"));
@@ -5530,13 +5548,20 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_register_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/register */ "./resources/js/components/register.vue"));
     },
     name: 'user.register'
+  }, {
+    path: '/user/personal',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_personal_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/personal */ "./resources/js/components/personal.vue"));
+    },
+    name: 'user.personal'
   }]
 });
 router.beforeEach(function (to, from, next) {
-  var token = localStorage.getItem('x-xsrf-token'); // Debug logs.
+  var token = localStorage.getItem('x-xsrf-token');
+  var userRole = _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.userRole; // Debug logs.
 
-  console.log(_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters);
-  console.log(_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.userRole);
+  console.log(token);
+  console.log(userRole);
 
   if (!token) {
     if (to.name === 'user.login' || to.name === 'user.register') {
@@ -28172,6 +28197,10 @@ var render = function () {
   return _c(
     "div",
     [
+      _c("router-link", { attrs: { to: { name: "debug/get" } } }, [
+        _vm._v("Debug get"),
+      ]),
+      _vm._v(" "),
       !_vm.token
         ? _c("router-link", { attrs: { to: { name: "user.login" } } }, [
             _vm._v("Login"),
@@ -28181,6 +28210,12 @@ var render = function () {
       !_vm.token
         ? _c("router-link", { attrs: { to: { name: "user.register" } } }, [
             _vm._v("Sign up"),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.userRole
+        ? _c("router-link", { attrs: { to: { name: "user.personal" } } }, [
+            _vm._v("Personal"),
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -44909,7 +44944,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_login_vue":1,"resources_js_components_register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_debug_get_vue":1,"resources_js_components_login_vue":1,"resources_js_components_register_vue":1,"resources_js_components_personal_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
