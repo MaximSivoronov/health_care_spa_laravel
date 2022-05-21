@@ -5554,6 +5554,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_personal_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/personal */ "./resources/js/components/personal.vue"));
     },
     name: 'user.personal'
+  }, {
+    path: '/appointment/create',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_appointment_create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/appointment/create */ "./resources/js/components/appointment/create.vue"));
+    },
+    name: 'appointment.create'
   }]
 });
 router.beforeEach(function (to, from, next) {
@@ -44943,7 +44949,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_debug_get_vue":1,"resources_js_components_login_vue":1,"resources_js_components_register_vue":1,"resources_js_components_personal_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_debug_get_vue":1,"resources_js_components_login_vue":1,"resources_js_components_register_vue":1,"resources_js_components_personal_vue":1,"resources_js_components_appointment_create_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -15,9 +15,9 @@ export default {
     methods: {
         getAppointments() {
             axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.get('/api/appointments')
+                axios.get('/api/appointment')
                     .then(r => {
-                        console.log(r.data[0].beginning_time);
+                        console.log(r.data);
                     })
             });
         },

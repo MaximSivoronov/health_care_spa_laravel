@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/user', [\App\Http\Controllers\UserController::class, 'getAuthenticatedUser']);
-    Route::get('/appointments', [\App\Http\Controllers\AppointmentsController::class, 'getAllAppointments']);
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'getAllUsers']);
+    Route::get('/appointment', [\App\Http\Controllers\AppointmentsController::class, 'getAllAppointments']);
+    Route::post('/appointment', [\App\Http\Controllers\AppointmentsController::class, 'storeAppointment']);
 });

@@ -24,6 +24,10 @@ const router = new VueRouter({
             path: '/user/personal', component: () => import('./components/personal'),
             name: 'user.personal',
         },
+        {
+            path: '/appointment/create', component: () => import('./components/appointment/create'),
+            name: 'appointment.create',
+        },
     ],
 });
 

@@ -25,8 +25,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getAppointments: function getAppointments() {
       axios.get('/sanctum/csrf-cookie').then(function (response) {
-        axios.get('/api/appointments').then(function (r) {
-          console.log(r.data[0].beginning_time);
+        axios.get('/api/appointment').then(function (r) {
+          console.log(r.data);
         });
       });
     }

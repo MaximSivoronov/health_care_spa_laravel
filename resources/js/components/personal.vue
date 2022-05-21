@@ -54,7 +54,7 @@
                 </div>
                 <div class="card-body">
                     <div class="m-auto text-center">
-                        <button class="btn btn-primary">Create new appointment</button>
+                        <button class="btn btn-primary" @click.prevent="redirectToCreateAppointment">Create new appointment</button>
                     </div>
                     <table class="table appointments-table mt-3">
                         <thead>
@@ -101,7 +101,7 @@
                     <div class="card-body">
                         <h3 class="card-title pt-3">All appointments:</h3>
                         <div class="m-auto text-center">
-                            <button class="btn btn-primary">Create new appointment</button>
+                            <button class="btn btn-primary" @click.prevent="redirectToCreateAppointment">Create new appointment</button>
                         </div>
                         <table class="table appointments-table mt-3">
                             <thead>
@@ -187,6 +187,9 @@ export default {
         getUser() {
             this.user = this.$store.getters.user;
         },
+        redirectToCreateAppointment() {
+            this.$router.push({ name: 'appointment.create' });
+        }
     },
 }
 </script>

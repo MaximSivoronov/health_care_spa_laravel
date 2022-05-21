@@ -195,6 +195,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getUser: function getUser() {
       this.user = this.$store.getters.user;
+    },
+    redirectToCreateAppointment: function redirectToCreateAppointment() {
+      this.$router.push({
+        name: 'appointment.create'
+      });
     }
   }
 });
@@ -733,7 +738,32 @@ var render = function () {
             _vm._v("Your personal worker id: " + _vm._s(this.user.id)),
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "card m-auto appointments" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "m-auto text-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.redirectToCreateAppointment.apply(
+                          null,
+                          arguments
+                        )
+                      },
+                    },
+                  },
+                  [_vm._v("Create new appointment")]
+                ),
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+            ]),
+          ]),
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -749,9 +779,40 @@ var render = function () {
             _vm._v("Your personal admin id: " + _vm._s(this.user.id)),
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", [
+            _c("div", { staticClass: "card m-auto appointments" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h3", { staticClass: "card-title pt-3" }, [
+                  _vm._v("All appointments:"),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "m-auto text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.redirectToCreateAppointment.apply(
+                            null,
+                            arguments
+                          )
+                        },
+                      },
+                    },
+                    [_vm._v("Create new appointment")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _vm._m(4),
+              ]),
+            ]),
+          ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(5),
         ])
       : _vm._e(),
   ])
@@ -809,51 +870,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card m-auto appointments" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("h3", { staticClass: "card-title pt-3" }, [
-          _vm._v("Your appointments:"),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title pt-3" }, [
+        _vm._v("Your appointments:"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "table appointments-table mt-3" }, [
+      _c("thead", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
         ]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "m-auto text-center" }, [
-          _c("button", { staticClass: "btn btn-primary" }, [
-            _vm._v("Create new appointment"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("table", { staticClass: "table appointments-table mt-3" }, [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-            ]),
-          ]),
+      _c("tbody", [
+        _c("tr", [
+          _c("td", [_vm._v("Mark Otto")]),
           _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("Mark Otto")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("10:30")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("12:00")]),
-              _vm._v(" "),
-              _c("td", [
-                _c("button", { staticClass: "btn btn-success" }, [
-                  _vm._v("Chat"),
-                ]),
-                _vm._v(" "),
-                _c("button", { staticClass: "btn btn-danger" }, [
-                  _vm._v("Cancel"),
-                ]),
-              ]),
-            ]),
+          _c("td", [_vm._v("10:30")]),
+          _vm._v(" "),
+          _c("td", [_vm._v("12:00")]),
+          _vm._v(" "),
+          _c("td", [
+            _c("button", { staticClass: "btn btn-success" }, [_vm._v("Chat")]),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")]),
           ]),
         ]),
       ]),
@@ -863,57 +914,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "card m-auto appointments" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h2", { staticClass: "text-center" }, [_vm._v("Appointments")]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h2", { staticClass: "text-center" }, [_vm._v("Appointments")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "table appointments-table mt-3" }, [
+      _c("thead", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
         ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-title pt-3" }, [
-            _vm._v("All appointments:"),
-          ]),
+      ]),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("tr", [
+          _c("td", [_vm._v("Mark Otto")]),
           _vm._v(" "),
-          _c("div", { staticClass: "m-auto text-center" }, [
-            _c("button", { staticClass: "btn btn-primary" }, [
-              _vm._v("Create new appointment"),
-            ]),
-          ]),
+          _c("td", [_vm._v("10:30")]),
           _vm._v(" "),
-          _c("table", { staticClass: "table appointments-table mt-3" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v("Beginning time"),
-                ]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-              ]),
-            ]),
+          _c("td", [_vm._v("12:00")]),
+          _vm._v(" "),
+          _c("td", [
+            _c("button", { staticClass: "btn btn-success" }, [_vm._v("Chat")]),
             _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("Mark Otto")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("10:30")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("12:00")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("button", { staticClass: "btn btn-success" }, [
-                    _vm._v("Chat"),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-danger" }, [
-                    _vm._v("Cancel"),
-                  ]),
-                ]),
-              ]),
-            ]),
+            _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")]),
           ]),
         ]),
       ]),
