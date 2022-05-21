@@ -8,32 +8,35 @@
                 <h1>Hello, {{ this.user.name }}!</h1>
                 <h2>Glad to see you.</h2>
             </div>
-            <h3>Your personal id: {{ this.user.id }}</h3>
-            <div class="appointments">
-                <h3>Yor appointments:</h3>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Specialist</th>
-                        <th scope="col">Doctor</th>
-                        <th scope="col">Beginning time</th>
-                        <th scope="col">Ending time</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">Surgeon</th>
-                        <td>Mark Otto</td>
-                        <td>10:30</td>
-                        <td>12:00</td>
-                        <td>
-                            <button class="btn btn-success">Chat</button>
-                            <button class="btn btn-danger">Cancel</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <h3 class="mb-3">Your personal client id: {{ this.user.id }}</h3>
+            <div class="card m-auto appointments">
+                <div class="card-header">
+                    <h3 class="card-title pt-3">Your appointments:</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table appointments-table mt-3">
+                        <thead>
+                        <tr>
+                            <th scope="col">Specialist</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Beginning time</th>
+                            <th scope="col">Ending time</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Surgeon</td>
+                            <td>Mark Otto</td>
+                            <td>10:30</td>
+                            <td>12:00</td>
+                            <td>
+                                <button class="btn btn-success">Register</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -46,8 +49,10 @@
             </div>
             <h3 class="mb-3">Your personal worker id: {{ this.user.id }}</h3>
             <div class="card m-auto appointments">
+                <div class="card-header">
+                    <h3 class="card-title pt-3">Your appointments:</h3>
+                </div>
                 <div class="card-body">
-                    <h3 class="card-title">Your appointments:</h3>
                     <div class="m-auto text-center">
                         <button class="btn btn-primary">Create new appointment</button>
                     </div>
@@ -89,10 +94,12 @@
             <!-- All appointments table -->
 
             <div>
-                <h2 class="text-center">Appointments</h2>
                 <div class="card m-auto appointments">
+                    <div class="card-header">
+                        <h2 class="text-center">Appointments</h2>
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-title">All appointments:</h3>
+                        <h3 class="card-title pt-3">All appointments:</h3>
                         <div class="m-auto text-center">
                             <button class="btn btn-primary">Create new appointment</button>
                         </div>
@@ -125,10 +132,12 @@
             <!--Users table-->
 
             <div class="mt-5">
-                <h2 class="text-center">Users</h2>
                 <div class="card m-auto appointments">
+                    <div class="card-header">
+                        <h2 class="text-center">Users</h2>
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-title">All users:</h3>
+                        <h3 class="card-title pt-3">All users:</h3>
                         <table class="table appointments-table mt-3">
                             <thead>
                             <tr>
@@ -195,5 +204,8 @@ export default {
 .appointments-table {
     width: 750px;
     margin: auto;
+}
+th, tr {
+    text-align: center;
 }
 </style>

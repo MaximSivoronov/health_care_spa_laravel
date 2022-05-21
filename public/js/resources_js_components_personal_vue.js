@@ -173,6 +173,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
@@ -208,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".name-title[data-v-00f8c78b] {\n  text-align: center;\n}\n.appointments[data-v-00f8c78b] {\n  display: flex;\n  width: 75%;\n}\n.appointments-table[data-v-00f8c78b] {\n  width: 750px;\n  margin: auto;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".name-title[data-v-00f8c78b] {\n  text-align: center;\n}\n.appointments[data-v-00f8c78b] {\n  display: flex;\n  width: 75%;\n}\n.appointments-table[data-v-00f8c78b] {\n  width: 750px;\n  margin: auto;\n}\nth[data-v-00f8c78b], tr[data-v-00f8c78b] {\n  text-align: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -704,7 +713,9 @@ var render = function () {
             _c("h2", [_vm._v("Glad to see you.")]),
           ]),
           _vm._v(" "),
-          _c("h3", [_vm._v("Your personal id: " + _vm._s(this.user.id))]),
+          _c("h3", { staticClass: "mb-3" }, [
+            _vm._v("Your personal client id: " + _vm._s(this.user.id)),
+          ]),
           _vm._v(" "),
           _vm._m(0),
         ])
@@ -750,41 +761,43 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "appointments" }, [
-      _c("h3", [_vm._v("Yor appointments:")]),
-      _vm._v(" "),
-      _c("table", { staticClass: "table" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialist")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Doctor")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-          ]),
+    return _c("div", { staticClass: "card m-auto appointments" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title pt-3" }, [
+          _vm._v("Your appointments:"),
         ]),
-        _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v("Surgeon")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Mark Otto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("10:30")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("12:00")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("button", { staticClass: "btn btn-success" }, [
-                _vm._v("Chat"),
-              ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("table", { staticClass: "table appointments-table mt-3" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialist")]),
               _vm._v(" "),
-              _c("button", { staticClass: "btn btn-danger" }, [
-                _vm._v("Cancel"),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("Surgeon")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Mark Otto")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("10:30")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("12:00")]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", { staticClass: "btn btn-success" }, [
+                  _vm._v("Register"),
+                ]),
               ]),
             ]),
           ]),
@@ -797,9 +810,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card m-auto appointments" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title pt-3" }, [
+          _vm._v("Your appointments:"),
+        ]),
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("h3", { staticClass: "card-title" }, [_vm._v("Your appointments:")]),
-        _vm._v(" "),
         _c("div", { staticClass: "m-auto text-center" }, [
           _c("button", { staticClass: "btn btn-primary" }, [
             _vm._v("Create new appointment"),
@@ -847,11 +864,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h2", { staticClass: "text-center" }, [_vm._v("Appointments")]),
-      _vm._v(" "),
       _c("div", { staticClass: "card m-auto appointments" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h2", { staticClass: "text-center" }, [_vm._v("Appointments")]),
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-title" }, [
+          _c("h3", { staticClass: "card-title pt-3" }, [
             _vm._v("All appointments:"),
           ]),
           _vm._v(" "),
@@ -905,11 +924,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mt-5" }, [
-      _c("h2", { staticClass: "text-center" }, [_vm._v("Users")]),
-      _vm._v(" "),
       _c("div", { staticClass: "card m-auto appointments" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h2", { staticClass: "text-center" }, [_vm._v("Users")]),
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-title" }, [_vm._v("All users:")]),
+          _c("h3", { staticClass: "card-title pt-3" }, [_vm._v("All users:")]),
           _vm._v(" "),
           _c("table", { staticClass: "table appointments-table mt-3" }, [
             _c("thead", [
