@@ -32,8 +32,8 @@ router.beforeEach((to, from, next) => {
     let user = store.getters.user;
 
     // Debug logs.
-    console.log(token);
-    console.log(user);
+    // console.log(token);
+    // console.log(user);
 
     if (!token) {
         if (to.name === 'user.login' || to.name === 'user.register') {

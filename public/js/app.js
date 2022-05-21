@@ -5559,9 +5559,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
 router.beforeEach(function (to, from, next) {
   var token = localStorage.getItem('x-xsrf-token');
   var user = _store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.user; // Debug logs.
-
-  console.log(token);
-  console.log(user);
+  // console.log(token);
+  // console.log(user);
 
   if (!token) {
     if (to.name === 'user.login' || to.name === 'user.register') {

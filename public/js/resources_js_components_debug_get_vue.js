@@ -18,7 +18,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "get"
+  name: "get",
+  mounted: function mounted() {
+    this.getAppointments();
+  },
+  methods: {
+    getAppointments: function getAppointments() {
+      axios.get('/sanctum/csrf-cookie').then(function (response) {
+        axios.get('/api/appointments').then(function (r) {
+          console.log(r.data[0].beginning_time);
+        });
+      });
+    }
+  }
 });
 
 /***/ }),
