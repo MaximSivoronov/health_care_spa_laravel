@@ -9,6 +9,9 @@
                 <h2>Glad to see you.</h2>
             </div>
             <h3 class="mb-3">Your personal client id: {{ this.user.id }}</h3>
+
+            <!-- Available appointments for client -->
+
             <div class="card m-auto appointments">
                 <div class="card-header">
                     <h3 class="card-title pt-3">Available appointments:</h3>
@@ -25,11 +28,43 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="appointment in appointments">
+                        <tr v-for="appointment in user_appointments">
                             <td>{{ appointment.specialization }}</td>
                             <td>{{ appointment.doctor_name }}</td>
                             <td>{{ appointment.beginning_time_formatted }}</td>
                             <td>{{ appointment.ending_time_formatted }}</td>
+                            <td>
+                                <button class="btn btn-success">Register</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Current scheduled appointments -->
+
+            <div class="card m-auto appointments">
+                <div class="card-header">
+                    <h3 class="card-title pt-3">Your appointments:</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table appointments-table mt-3">
+                        <thead>
+                        <tr>
+                            <th scope="col">Specialist</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Beginning time</th>
+                            <th scope="col">Ending time</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>123</td>
+                            <td>123</td>
+                            <td>123</td>
+                            <td>123</td>
                             <td>
                                 <button class="btn btn-success">Register</button>
                             </td>
@@ -176,7 +211,8 @@ export default {
     data() {
         return {
             user: '',
-            appointments: [],
+            user_appointments: [],
+            available_appointments: [],
         }
     },
 

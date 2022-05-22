@@ -182,12 +182,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
     return {
       user: '',
-      appointments: []
+      user_appointments: [],
+      available_appointments: []
     };
   },
   mounted: function mounted() {
@@ -741,7 +777,7 @@ var render = function () {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.appointments, function (appointment) {
+                  _vm._l(_vm.user_appointments, function (appointment) {
                     return _c("tr", [
                       _c("td", [_vm._v(_vm._s(appointment.specialization))]),
                       _vm._v(" "),
@@ -763,6 +799,8 @@ var render = function () {
               ]),
             ]),
           ]),
+          _vm._v(" "),
+          _vm._m(3),
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -779,7 +817,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card m-auto appointments" }, [
-            _vm._m(3),
+            _vm._m(4),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "m-auto text-center" }, [
@@ -801,7 +839,7 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(5),
             ]),
           ]),
         ])
@@ -821,7 +859,7 @@ var render = function () {
           _vm._v(" "),
           _c("div", [
             _c("div", { staticClass: "card m-auto appointments" }, [
-              _vm._m(5),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("h3", { staticClass: "card-title pt-3" }, [
@@ -847,12 +885,12 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(6),
+                _vm._m(7),
               ]),
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(7),
+          _vm._m(8),
         ])
       : _vm._e(),
   ])
@@ -892,6 +930,54 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("button", { staticClass: "btn btn-success" }, [_vm._v("Register")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card m-auto appointments" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("h3", { staticClass: "card-title pt-3" }, [
+          _vm._v("Your appointments:"),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("table", { staticClass: "table appointments-table mt-3" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialist")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("123")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("123")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("123")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("123")]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", { staticClass: "btn btn-success" }, [
+                  _vm._v("Register"),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
   },
   function () {
