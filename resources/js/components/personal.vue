@@ -11,7 +11,7 @@
             <h3 class="mb-3">Your personal client id: {{ this.user.id }}</h3>
             <div class="card m-auto appointments">
                 <div class="card-header">
-                    <h3 class="card-title pt-3">Your appointments:</h3>
+                    <h3 class="card-title pt-3">Available appointments:</h3>
                 </div>
                 <div class="card-body">
                     <table class="table appointments-table mt-3">
@@ -25,11 +25,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Surgeon</td>
-                            <td>Mark Otto</td>
-                            <td>10:30</td>
-                            <td>12:00</td>
+                        <tr v-for="appointment in appointments">
+                            <td>{{ appointment.id }}</td>
+                            <td>{{ appointment.doctor_name }}</td>
+                            <td>{{ appointment.beginning_time_formatted }}</td>
+                            <td>{{ appointment.ending_time_formatted }}</td>
                             <td>
                                 <button class="btn btn-success">Register</button>
                             </td>
@@ -176,16 +176,25 @@ export default {
     data() {
         return {
             user: '',
+            appointments: [],
         }
     },
 
     mounted() {
         this.getUser();
+        this.getAppointments();
     },
 
     methods: {
         getUser() {
             this.user = this.$store.getters.user;
+        },
+        getAppointments() {
+            axios.get('/api/appointment')
+                .then(r => {
+                    console.log(r.data);
+                    this.appointments = r.data;
+                })
         },
         redirectToCreateAppointment() {
             this.$router.push({ name: 'appointment.create' });
