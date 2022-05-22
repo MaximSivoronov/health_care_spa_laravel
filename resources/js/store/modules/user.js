@@ -7,21 +7,23 @@ const getters = {
 }
 
 const mutations = {
-    setUserRole(state, user) {
+    setUser(state, user) {
         state.user = user;
     }
 }
 
 const actions = {
     getUser({state, commit, dispatch}) {
-        axios.get('/api/user')
-            .then(r => {
-                commit('setUserRole', r.data);
-            });
+        setTimeout(() => {
+            axios.get('/api/user')
+                .then(r => {
+                    commit('setUser', r.data);
+                });
+        }, 300);
     },
 
-    setUser({state, commit, dispatch}, userRole) {
-        commit('setUserRole', userRole);
+    setUser({state, commit, dispatch}, user) {
+        commit('setUser', user);
     },
 }
 

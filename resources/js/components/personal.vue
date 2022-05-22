@@ -28,7 +28,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="appointment in user_appointments">
+                        <tr v-for="appointment in available_appointments">
                             <td>{{ appointment.specialization }}</td>
                             <td>{{ appointment.doctor_name }}</td>
                             <td>{{ appointment.beginning_time_formatted }}</td>
@@ -44,7 +44,7 @@
 
             <!-- Current scheduled appointments -->
 
-            <div class="card m-auto appointments">
+            <div class="card m-auto appointments mt-5">
                 <div class="card-header">
                     <h3 class="card-title pt-3">Your appointments:</h3>
                 </div>
@@ -223,13 +223,17 @@ export default {
 
     methods: {
         getUser() {
-            this.user = this.$store.getters.user;
-        },
-        getAppointments() {
-            axios.get('/api/appointment')
+            axios.get('/api/user')
                 .then(r => {
                     console.log(r.data);
-                    this.appointments = r.data;
+                    this.user = r.data;
+                });
+        },
+        getAppointments() {
+            axios.get('/api/appointments/client/available')
+                .then(r => {
+                    console.log(r.data);
+                    this.available_appointments = r.data;
                 })
         },
         redirectToCreateAppointment() {

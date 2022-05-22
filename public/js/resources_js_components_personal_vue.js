@@ -232,14 +232,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getUser: function getUser() {
-      this.user = this.$store.getters.user;
-    },
-    getAppointments: function getAppointments() {
       var _this = this;
 
-      axios.get('/api/appointment').then(function (r) {
+      axios.get('/api/user').then(function (r) {
         console.log(r.data);
-        _this.appointments = r.data;
+        _this.user = r.data;
+      });
+    },
+    getAppointments: function getAppointments() {
+      var _this2 = this;
+
+      axios.get('/api/appointments/client/available').then(function (r) {
+        console.log(r.data);
+        _this2.available_appointments = r.data;
       });
     },
     redirectToCreateAppointment: function redirectToCreateAppointment() {
@@ -777,7 +782,7 @@ var render = function () {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.user_appointments, function (appointment) {
+                  _vm._l(_vm.available_appointments, function (appointment) {
                     return _c("tr", [
                       _c("td", [_vm._v(_vm._s(appointment.specialization))]),
                       _vm._v(" "),
@@ -936,7 +941,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card m-auto appointments" }, [
+    return _c("div", { staticClass: "card m-auto appointments mt-5" }, [
       _c("div", { staticClass: "card-header" }, [
         _c("h3", { staticClass: "card-title pt-3" }, [
           _vm._v("Your appointments:"),

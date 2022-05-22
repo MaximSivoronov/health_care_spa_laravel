@@ -16,28 +16,27 @@ export default {
     data() {
         return {
             token: '',
-            user: this.$store.getters.user,
+            user: '',
         }
     },
 
     mounted() {
-        this.getToken();
-        this.getUser();
+        this.setupUser();
     },
 
     updated() {
-        this.getToken();
-        this.getUser();
+        this.setupUser();
     },
 
     methods: {
         logout() {
             axios.post('/logout')
                 .then(r => {
-                    // Delete token.
+                    // Delete token and user.
                     localStorage.removeItem('x-xsrf-token');
+                    this.user = null;
 
-                    // Reset user role in vuex.
+                    // Reset user in vuex.
                     this.$store.dispatch('setUser', '');
 
                     // Redirect to login page.
@@ -45,14 +44,32 @@ export default {
                 });
         },
 
+        setupUser() {
+            this.getToken();
+            this.getUser();
+        },
+
         getToken() {
             this.token = localStorage.getItem('x-xsrf-token');
         },
 
         getUser() {
-            setTimeout(() => {
-                this.user = this.$store.getters.user;
-            }, 300);
+            // if (localStorage.getItem('current_user')) {
+            //     this.user = JSON.parse(localStorage.getItem('current_user'));
+            // } else {
+            //     setTimeout(() => {
+            //         this.user = this.$store.getters.user;
+            //     }, 300);
+            // }
+            if (localStorage.getItem('x-xsrf-token')) {
+                setTimeout(() => {
+                    axios.get('/api/user')
+                        .then(r => {
+                            console.log(r.data);
+                            this.user = r.data;
+                        });
+                }, 300);
+            }
         }
     },
 }

@@ -22,6 +22,32 @@ class AppointmentsController extends Controller
         return response()->json($data);
     }
 
+    public function getClientAvailableAppointments()
+    {
+        $data = Appointment::where('client_id', null)->get();
+
+        foreach ($data as $appointment) {
+            $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
+            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
+            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
+        }
+
+        return response()->json($data);
+    }
+
+    public function getClientScheduledAppointments()
+    {
+        $data = Appointment::where('client_id', auth()->id())->get();
+
+        foreach ($data as $appointment) {
+            $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
+            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
+            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
+        }
+
+        return response()->json($data);
+    }
+
     public function storeAppointment(Request $request)
     {
         $data = [

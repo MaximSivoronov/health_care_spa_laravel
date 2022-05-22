@@ -5384,24 +5384,23 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       token: '',
-      user: this.$store.getters.user
+      user: ''
     };
   },
   mounted: function mounted() {
-    this.getToken();
-    this.getUser();
+    this.setupUser();
   },
   updated: function updated() {
-    this.getToken();
-    this.getUser();
+    this.setupUser();
   },
   methods: {
     logout: function logout() {
       var _this = this;
 
       axios.post('/logout').then(function (r) {
-        // Delete token.
-        localStorage.removeItem('x-xsrf-token'); // Reset user role in vuex.
+        // Delete token and user.
+        localStorage.removeItem('x-xsrf-token');
+        _this.user = null; // Reset user in vuex.
 
         _this.$store.dispatch('setUser', ''); // Redirect to login page.
 
@@ -5411,15 +5410,31 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
+    setupUser: function setupUser() {
+      this.getToken();
+      this.getUser();
+    },
     getToken: function getToken() {
       this.token = localStorage.getItem('x-xsrf-token');
     },
     getUser: function getUser() {
       var _this2 = this;
 
-      setTimeout(function () {
-        _this2.user = _this2.$store.getters.user;
-      }, 300);
+      // if (localStorage.getItem('current_user')) {
+      //     this.user = JSON.parse(localStorage.getItem('current_user'));
+      // } else {
+      //     setTimeout(() => {
+      //         this.user = this.$store.getters.user;
+      //     }, 300);
+      // }
+      if (localStorage.getItem('x-xsrf-token')) {
+        setTimeout(function () {
+          axios.get('/api/user').then(function (r) {
+            console.log(r.data);
+            _this2.user = r.data;
+          });
+        }, 300);
+      }
     }
   }
 });
@@ -5636,7 +5651,7 @@ var getters = {
   }
 };
 var mutations = {
-  setUserRole: function setUserRole(state, user) {
+  setUser: function setUser(state, user) {
     state.user = user;
   }
 };
@@ -5645,15 +5660,17 @@ var actions = {
     var state = _ref.state,
         commit = _ref.commit,
         dispatch = _ref.dispatch;
-    axios.get('/api/user').then(function (r) {
-      commit('setUserRole', r.data);
-    });
+    setTimeout(function () {
+      axios.get('/api/user').then(function (r) {
+        commit('setUser', r.data);
+      });
+    }, 300);
   },
-  setUser: function setUser(_ref2, userRole) {
+  setUser: function setUser(_ref2, user) {
     var state = _ref2.state,
         commit = _ref2.commit,
         dispatch = _ref2.dispatch;
-    commit('setUserRole', userRole);
+    commit('setUser', user);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
