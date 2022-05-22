@@ -10,43 +10,11 @@
             </div>
             <h3 class="mb-3">Your personal client id: {{ this.user.id }}</h3>
 
-            <!-- Available appointments for client -->
+            <!-- Current scheduled appointments -->
 
             <div class="card m-auto appointments">
                 <div class="card-header">
-                    <h3 class="card-title pt-3">Available appointments:</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table appointments-table mt-3">
-                        <thead>
-                        <tr>
-                            <th scope="col">Specialist</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Beginning time</th>
-                            <th scope="col">Ending time</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="appointment in available_appointments">
-                            <td>{{ appointment.specialization }}</td>
-                            <td>{{ appointment.doctor_name }}</td>
-                            <td>{{ appointment.beginning_time_formatted }}</td>
-                            <td>{{ appointment.ending_time_formatted }}</td>
-                            <td>
-                                <button class="btn btn-success">Register</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Current scheduled appointments -->
-
-            <div class="card m-auto appointments mt-5">
-                <div class="card-header">
-                    <h3 class="card-title pt-3">Your appointments:</h3>
+                    <h3 class="card-title">Your appointments:</h3>
                 </div>
                 <div class="card-body">
                     <table class="table appointments-table mt-3">
@@ -75,6 +43,38 @@
             </div>
         </div>
 
+        <!-- Available appointments for client -->
+
+        <div class="card m-auto appointments mt-5">
+            <div class="card-header">
+                <h3 class="card-title">Available appointments:</h3>
+            </div>
+            <div class="card-body">
+                <table class="table appointments-table mt-3">
+                    <thead>
+                    <tr>
+                        <th scope="col">Specialist</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Beginning time</th>
+                        <th scope="col">Ending time</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="appointment in available_appointments">
+                        <td>{{ appointment.specialization }}</td>
+                        <td>{{ appointment.doctor_name }}</td>
+                        <td>{{ appointment.beginning_time_formatted }}</td>
+                        <td>{{ appointment.ending_time_formatted }}</td>
+                        <td>
+                            <button class="btn btn-success">Register</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <!-- Personal page for doctor user -->
 
         <div v-if="this.user.role === 'doctor'">
@@ -89,7 +89,9 @@
                 </div>
                 <div class="card-body">
                     <div class="m-auto text-center">
-                        <button class="btn btn-primary" @click.prevent="redirectToCreateAppointment">Create new appointment</button>
+                        <button class="btn btn-primary" @click.prevent="redirectToCreateAppointment">Create new
+                            appointment
+                        </button>
                     </div>
                     <table class="table appointments-table mt-3">
                         <thead>
@@ -136,7 +138,9 @@
                     <div class="card-body">
                         <h3 class="card-title pt-3">All appointments:</h3>
                         <div class="m-auto text-center">
-                            <button class="btn btn-primary" @click.prevent="redirectToCreateAppointment">Create new appointment</button>
+                            <button class="btn btn-primary" @click.prevent="redirectToCreateAppointment">Create new
+                                appointment
+                            </button>
                         </div>
                         <table class="table appointments-table mt-3">
                             <thead>
@@ -217,8 +221,10 @@ export default {
     },
 
     mounted() {
-        this.getUser();
-        this.getAppointments();
+        setTimeout(() => {
+            this.getUser();
+            this.getClientAppointments();
+        }, 300);
     },
 
     methods: {
@@ -229,7 +235,7 @@ export default {
                     this.user = r.data;
                 });
         },
-        getAppointments() {
+        getClientAppointments() {
             axios.get('/api/appointments/client/available')
                 .then(r => {
                     console.log(r.data);
@@ -237,7 +243,7 @@ export default {
                 })
         },
         redirectToCreateAppointment() {
-            this.$router.push({ name: 'appointment.create' });
+            this.$router.push({name: 'appointment.create'});
         }
     },
 }
@@ -257,6 +263,7 @@ export default {
     width: 750px;
     margin: auto;
 }
+
 th, tr {
     text-align: center;
 }

@@ -5388,53 +5388,50 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.setupUser();
+    var _this = this;
+
+    setTimeout(function () {
+      _this.setupUser();
+    }, 300);
   },
   updated: function updated() {
-    this.setupUser();
+    this.getToken();
   },
   methods: {
     logout: function logout() {
-      var _this = this;
+      var _this2 = this;
 
       axios.post('/logout').then(function (r) {
         // Delete token and user.
         localStorage.removeItem('x-xsrf-token');
-        _this.user = null; // Reset user in vuex.
+        _this2.user = null;
+        _this2.token = null; // Reset user in vuex.
 
-        _this.$store.dispatch('setUser', ''); // Redirect to login page.
+        _this2.$store.dispatch('setUser', ''); // Redirect to login page.
 
 
-        _this.$router.push({
+        _this2.$router.push({
           name: 'user.login'
         });
       });
     },
-    setupUser: function setupUser() {
-      this.getToken();
-      this.getUser();
-    },
     getToken: function getToken() {
       this.token = localStorage.getItem('x-xsrf-token');
     },
-    getUser: function getUser() {
-      var _this2 = this;
+    setupUser: function setupUser() {
+      var _this3 = this;
 
-      // if (localStorage.getItem('current_user')) {
-      //     this.user = JSON.parse(localStorage.getItem('current_user'));
-      // } else {
-      //     setTimeout(() => {
-      //         this.user = this.$store.getters.user;
-      //     }, 300);
-      // }
-      if (localStorage.getItem('x-xsrf-token')) {
-        setTimeout(function () {
-          axios.get('/api/user').then(function (r) {
-            console.log(r.data);
-            _this2.user = r.data;
-          });
-        }, 300);
-      }
+      this.getToken();
+      setTimeout(function () {
+        if (localStorage.getItem('x-xsrf-token')) {
+          setTimeout(function () {
+            axios.get('/api/user').then(function (r) {
+              console.log(r.data);
+              _this3.user = r.data;
+            });
+          }, 300);
+        }
+      }, 300);
     }
   }
 });
@@ -28235,7 +28232,7 @@ var render = function () {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm.user
+      _vm.token
         ? _c("router-link", { attrs: { to: { name: "user.personal" } } }, [
             _vm._v("Personal"),
           ])

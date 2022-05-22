@@ -3,7 +3,7 @@
         <router-link :to="{ name: 'debug/get' }">Debug get</router-link>
         <router-link v-if="!token" :to="{ name: 'user.login' }">Login</router-link>
         <router-link v-if="!token" :to="{ name: 'user.register' }">Sign up</router-link>
-        <router-link v-if="user" :to="{ name: 'user.personal' }">Personal</router-link>
+        <router-link v-if="token" :to="{ name: 'user.personal' }">Personal</router-link>
         <a v-if="token" @click.prevent="logout" href="#">Logout</a>
         <router-view></router-view>
     </div>
@@ -21,11 +21,13 @@ export default {
     },
 
     mounted() {
-        this.setupUser();
+        setTimeout(() => {
+            this.setupUser();
+        }, 300);
     },
 
     updated() {
-        this.setupUser();
+        this.getToken();
     },
 
     methods: {
@@ -35,6 +37,7 @@ export default {
                     // Delete token and user.
                     localStorage.removeItem('x-xsrf-token');
                     this.user = null;
+                    this.token = null;
 
                     // Reset user in vuex.
                     this.$store.dispatch('setUser', '');
@@ -44,33 +47,24 @@ export default {
                 });
         },
 
-        setupUser() {
-            this.getToken();
-            this.getUser();
-        },
-
         getToken() {
             this.token = localStorage.getItem('x-xsrf-token');
         },
 
-        getUser() {
-            // if (localStorage.getItem('current_user')) {
-            //     this.user = JSON.parse(localStorage.getItem('current_user'));
-            // } else {
-            //     setTimeout(() => {
-            //         this.user = this.$store.getters.user;
-            //     }, 300);
-            // }
-            if (localStorage.getItem('x-xsrf-token')) {
-                setTimeout(() => {
-                    axios.get('/api/user')
-                        .then(r => {
-                            console.log(r.data);
-                            this.user = r.data;
-                        });
-                }, 300);
-            }
-        }
+        setupUser() {
+            this.getToken();
+            setTimeout(() => {
+                if (localStorage.getItem('x-xsrf-token')) {
+                    setTimeout(() => {
+                        axios.get('/api/user')
+                            .then(r => {
+                                console.log(r.data);
+                                this.user = r.data;
+                            });
+                    }, 300);
+                }
+            }, 300);
+        },
     },
 }
 </script>
