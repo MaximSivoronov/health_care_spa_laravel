@@ -26,7 +26,7 @@
                         </thead>
                         <tbody>
                         <tr v-for="appointment in appointments">
-                            <td>{{ appointment.id }}</td>
+                            <td>{{ appointment.specialization }}</td>
                             <td>{{ appointment.doctor_name }}</td>
                             <td>{{ appointment.beginning_time_formatted }}</td>
                             <td>{{ appointment.ending_time_formatted }}</td>

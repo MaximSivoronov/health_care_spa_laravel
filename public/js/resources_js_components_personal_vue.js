@@ -743,7 +743,7 @@ var render = function () {
                   "tbody",
                   _vm._l(_vm.appointments, function (appointment) {
                     return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(appointment.id))]),
+                      _c("td", [_vm._v(_vm._s(appointment.specialization))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(appointment.doctor_name))]),
                       _vm._v(" "),
