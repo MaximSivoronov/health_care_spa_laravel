@@ -236,7 +236,9 @@ __webpack_require__.r(__webpack_exports__);
     setTimeout(function () {
       _this.getUser();
 
-      _this.getClientAppointments();
+      _this.getClientAvalilableAppointments();
+
+      _this.getDoctorScheduledAppointments();
     }, 300);
   },
   methods: {
@@ -248,7 +250,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.user = r.data;
       });
     },
-    getClientAppointments: function getClientAppointments() {
+    getClientAvalilableAppointments: function getClientAvalilableAppointments() {
       var _this3 = this;
 
       setTimeout(function () {
@@ -256,6 +258,17 @@ __webpack_require__.r(__webpack_exports__);
           axios.get('/api/appointments/client/available').then(function (r) {
             console.log(r.data);
             _this3.available_appointments = r.data;
+          });
+        }
+      }, 300);
+    },
+    getDoctorScheduledAppointments: function getDoctorScheduledAppointments() {
+      var _this4 = this;
+
+      setTimeout(function () {
+        if (_this4.user.role === 'doctor') {
+          axios.get('/api/appointments/doctor/scheduled').then(function (r) {
+            console.log(r.data);
           });
         }
       }, 300);

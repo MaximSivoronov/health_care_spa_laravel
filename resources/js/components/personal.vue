@@ -223,7 +223,8 @@ export default {
     mounted() {
         setTimeout(() => {
             this.getUser();
-            this.getClientAppointments();
+            this.getClientAvalilableAppointments();
+            this.getDoctorScheduledAppointments();
         }, 300);
     },
 
@@ -235,13 +236,23 @@ export default {
                     this.user = r.data;
                 });
         },
-        getClientAppointments() {
+        getClientAvalilableAppointments() {
             setTimeout(() => {
                 if (this.user.role === 'client') {
                     axios.get('/api/appointments/client/available')
                         .then(r => {
                             console.log(r.data);
                             this.available_appointments = r.data;
+                        })
+                }
+            }, 300);
+        },
+        getDoctorScheduledAppointments() {
+            setTimeout(() => {
+                if (this.user.role === 'doctor') {
+                    axios.get('/api/appointments/doctor/scheduled')
+                        .then(r => {
+                            console.log(r.data);
                         })
                 }
             }, 300);
