@@ -244,7 +244,7 @@ __webpack_require__.r(__webpack_exports__);
     setTimeout(function () {
       _this.getUser();
 
-      _this.getClientAvalilableAppointments();
+      _this.getClientAppointments();
 
       _this.getDoctorScheduledAppointments();
     }, 300);
@@ -254,18 +254,19 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/api/user').then(function (r) {
-        console.log(r.data);
         _this2.user = r.data;
       });
     },
-    getClientAvalilableAppointments: function getClientAvalilableAppointments() {
+    getClientAppointments: function getClientAppointments() {
       var _this3 = this;
 
       setTimeout(function () {
         if (_this3.user.role === 'client') {
           axios.get('/api/appointments/client/available').then(function (r) {
-            console.log(r.data);
             _this3.available_appointments = r.data;
+          });
+          axios.get('/api/appointments/client/scheduled').then(function (r) {
+            _this3.user_appointments = r.data;
           });
         }
       }, 300);
@@ -276,7 +277,6 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         if (_this4.user.role === 'doctor') {
           axios.get('/api/appointments/doctor/scheduled').then(function (r) {
-            console.log(r.data);
             _this4.user_appointments = r.data;
           });
         }
@@ -809,15 +809,45 @@ var render = function () {
               _vm._v("Your personal client id: " + _vm._s(this.user.id)),
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "card m-auto appointments" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("table", { staticClass: "table appointments-table mt-3" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.user_appointments, function (appointment) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(appointment.specialization))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(appointment.doctor_name))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(appointment.beginning_time_formatted)),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(appointment.ending_time_formatted)),
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(2, true),
+                      ])
+                    }),
+                    0
+                  ),
+                ]),
+              ]),
+            ]),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card m-auto appointments mt-5" }, [
-            _vm._m(1),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("table", { staticClass: "table appointments-table mt-3" }, [
-                _vm._m(2),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -835,7 +865,7 @@ var render = function () {
                         _vm._v(_vm._s(appointment.ending_time_formatted)),
                       ]),
                       _vm._v(" "),
-                      _vm._m(3, true),
+                      _vm._m(5, true),
                     ])
                   }),
                   0
@@ -860,7 +890,7 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card m-auto appointments" }, [
-              _vm._m(4),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "m-auto text-center" }, [
@@ -887,7 +917,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("table", { staticClass: "table appointments-table mt-3" }, [
-                  _vm._m(5),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -944,7 +974,7 @@ var render = function () {
             _vm._v(" "),
             _c("div", [
               _c("div", { staticClass: "card m-auto appointments" }, [
-                _vm._m(6),
+                _vm._m(8),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("h3", { staticClass: "card-title pt-3" }, [
@@ -974,12 +1004,12 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(7),
+                  _vm._m(9),
                 ]),
               ]),
             ]),
             _vm._v(" "),
-            _vm._m(8),
+            _vm._m(10),
           ]),
         ])
       : _vm._e(),
@@ -990,46 +1020,34 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card m-auto appointments" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("h3", { staticClass: "card-title" }, [_vm._v("Your appointments:")]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Your appointments:")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialist")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table appointments-table mt-3" }, [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialist")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("123")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("123")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("123")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("123")]),
-              _vm._v(" "),
-              _c("td", [
-                _c("button", { staticClass: "btn btn-success" }, [
-                  _vm._v("Register"),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")]),
     ])
   },
   function () {

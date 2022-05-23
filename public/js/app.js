@@ -5426,7 +5426,6 @@ __webpack_require__.r(__webpack_exports__);
         if (localStorage.getItem('x-xsrf-token')) {
           setTimeout(function () {
             axios.get('/api/user').then(function (r) {
-              console.log(r.data);
               _this3.user = r.data;
             });
           }, 300);

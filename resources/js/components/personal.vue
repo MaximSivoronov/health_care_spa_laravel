@@ -29,13 +29,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>123</td>
-                                <td>123</td>
-                                <td>123</td>
-                                <td>123</td>
+                            <tr v-for="appointment in user_appointments">
+                                <td>{{ appointment.specialization }}</td>
+                                <td>{{ appointment.doctor_name }}</td>
+                                <td>{{ appointment.beginning_time_formatted }}</td>
+                                <td>{{ appointment.ending_time_formatted }}</td>
                                 <td>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-danger">Cancel</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -231,7 +231,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.getUser();
-            this.getClientAvalilableAppointments();
+            this.getClientAppointments();
             this.getDoctorScheduledAppointments();
         }, 300);
     },
@@ -240,18 +240,20 @@ export default {
         getUser() {
             axios.get('/api/user')
                 .then(r => {
-                    console.log(r.data);
                     this.user = r.data;
                 });
         },
-        getClientAvalilableAppointments() {
+        getClientAppointments() {
             setTimeout(() => {
                 if (this.user.role === 'client') {
                     axios.get('/api/appointments/client/available')
                         .then(r => {
-                            console.log(r.data);
                             this.available_appointments = r.data;
-                        })
+                        });
+                    axios.get('/api/appointments/client/scheduled')
+                        .then(r => {
+                            this.user_appointments = r.data;
+                        });
                 }
             }, 300);
         },
@@ -260,7 +262,6 @@ export default {
                 if (this.user.role === 'doctor') {
                     axios.get('/api/appointments/doctor/scheduled')
                         .then(r => {
-                            console.log(r.data);
                             this.user_appointments = r.data;
                         })
                 }

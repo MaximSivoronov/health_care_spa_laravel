@@ -58,7 +58,6 @@ export default {
                     setTimeout(() => {
                         axios.get('/api/user')
                             .then(r => {
-                                console.log(r.data);
                                 this.user = r.data;
                             });
                     }, 300);
