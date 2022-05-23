@@ -273,7 +273,7 @@ export default {
         getDoctorAppointments() {
             setTimeout(() => {
                 if (this.user.role === 'doctor') {
-                    axios.get('/api/appointments/doctor/scheduled')
+                    axios.get('/api/appointments/doctor')
                         .then(r => {
                             this.user_appointments = r.data;
                         })

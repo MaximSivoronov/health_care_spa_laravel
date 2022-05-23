@@ -290,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
 
       setTimeout(function () {
         if (_this4.user.role === 'doctor') {
-          axios.get('/api/appointments/doctor/scheduled').then(function (r) {
+          axios.get('/api/appointments/doctor').then(function (r) {
             _this4.user_appointments = r.data;
           });
         }
