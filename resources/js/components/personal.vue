@@ -236,11 +236,15 @@ export default {
                 });
         },
         getClientAppointments() {
-            axios.get('/api/appointments/client/available')
-                .then(r => {
-                    console.log(r.data);
-                    this.available_appointments = r.data;
-                })
+            setTimeout(() => {
+                if (this.user.role === 'client') {
+                    axios.get('/api/appointments/client/available')
+                        .then(r => {
+                            console.log(r.data);
+                            this.available_appointments = r.data;
+                        })
+                }
+            }, 300);
         },
         redirectToCreateAppointment() {
             this.$router.push({name: 'appointment.create'});

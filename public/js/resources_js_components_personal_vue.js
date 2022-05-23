@@ -251,10 +251,14 @@ __webpack_require__.r(__webpack_exports__);
     getClientAppointments: function getClientAppointments() {
       var _this3 = this;
 
-      axios.get('/api/appointments/client/available').then(function (r) {
-        console.log(r.data);
-        _this3.available_appointments = r.data;
-      });
+      setTimeout(function () {
+        if (_this3.user.role === 'client') {
+          axios.get('/api/appointments/client/available').then(function (r) {
+            console.log(r.data);
+            _this3.available_appointments = r.data;
+          });
+        }
+      }, 300);
     },
     redirectToCreateAppointment: function redirectToCreateAppointment() {
       this.$router.push({
