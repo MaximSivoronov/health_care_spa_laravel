@@ -208,13 +208,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark Otto</td>
-                                    <td>example@mail.ru</td>
-                                    <td>client</td>
+                                <tr v-for="user in all_users_for_admin">
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.role }}</td>
                                     <td>
-                                        <button class="btn btn-success">Change role</button>
+                                        <button class="btn btn-warning">Change role</button>
                                         <button class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -237,6 +237,7 @@ export default {
             user: '',
             user_appointments: [],
             available_appointments: [],
+            all_users_for_admin: [],
         }
     },
 
@@ -246,6 +247,7 @@ export default {
             this.getClientAppointments();
             this.getDoctorAppointments();
             this.getAdminAppointments();
+            this.getAllUsers();
         }, 300);
     },
 
@@ -287,6 +289,16 @@ export default {
                         .then(r => {
                             this.user_appointments = r.data;
                         })
+                }
+            }, 300);
+        },
+        getAllUsers() {
+            setTimeout(() => {
+                if (this.user.role === 'admin') {
+                    axios.get('/api/users')
+                        .then(r => {
+                            this.all_users_for_admin = r.data;
+                        });
                 }
             }, 300);
         },

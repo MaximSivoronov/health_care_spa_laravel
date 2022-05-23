@@ -247,7 +247,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: '',
       user_appointments: [],
-      available_appointments: []
+      available_appointments: [],
+      all_users_for_admin: []
     };
   },
   mounted: function mounted() {
@@ -261,6 +262,8 @@ __webpack_require__.r(__webpack_exports__);
       _this.getDoctorAppointments();
 
       _this.getAdminAppointments();
+
+      _this.getAllUsers();
     }, 300);
   },
   methods: {
@@ -303,6 +306,17 @@ __webpack_require__.r(__webpack_exports__);
         if (_this5.user.role === 'admin') {
           axios.get('/api/appointments/admin').then(function (r) {
             _this5.user_appointments = r.data;
+          });
+        }
+      }, 300);
+    },
+    getAllUsers: function getAllUsers() {
+      var _this6 = this;
+
+      setTimeout(function () {
+        if (_this6.user.role === 'admin') {
+          axios.get('/api/users').then(function (r) {
+            _this6.all_users_for_admin = r.data;
           });
         }
       }, 300);
@@ -1076,7 +1090,43 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _vm._m(11),
+            _c("div", { staticClass: "mt-5" }, [
+              _c("div", { staticClass: "card m-auto appointments" }, [
+                _vm._m(11),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h3", { staticClass: "card-title pt-3" }, [
+                    _vm._v("All users:"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "table",
+                    { staticClass: "table appointments-table mt-3" },
+                    [
+                      _vm._m(12),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.all_users_for_admin, function (user) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(user.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.email))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.role))]),
+                            _vm._v(" "),
+                            _vm._m(13, true),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
           ]),
         ])
       : _vm._e(),
@@ -1229,54 +1279,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-5" }, [
-      _c("div", { staticClass: "card m-auto appointments" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h2", { staticClass: "text-center" }, [_vm._v("Users")]),
-        ]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h2", { staticClass: "text-center" }, [_vm._v("Users")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("id")]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-title pt-3" }, [_vm._v("All users:")]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table appointments-table mt-3" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("id")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("email")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("role")]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("1")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Mark Otto")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("example@mail.ru")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("client")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("button", { staticClass: "btn btn-success" }, [
-                    _vm._v("Change role"),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-danger" }, [
-                    _vm._v("Delete"),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("role")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Change role")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")]),
     ])
   },
 ]
