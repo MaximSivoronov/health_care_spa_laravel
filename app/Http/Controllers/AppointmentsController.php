@@ -54,6 +54,13 @@ class AppointmentsController extends Controller
 
         foreach ($data as $appointment) {
             $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
+
+            $client = User::find($appointment['client_id']);
+
+            if ($client !== null) {
+                $appointment['client_name'] = $client->name;
+            }
+
             $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
             $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
         }
