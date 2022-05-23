@@ -9,10 +9,8 @@ use Illuminate\Http\Request;
 
 class AppointmentsController extends Controller
 {
-    public function getAllAppointments()
+    private function templatingAppointments($data)
     {
-        $data = Appointment::all();
-
         foreach ($data as $appointment) {
             $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
 
@@ -26,53 +24,35 @@ class AppointmentsController extends Controller
             $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
         }
 
-        return response()->json($data);
+        return $data;
+    }
+
+    public function getAllAppointments()
+    {
+        $data = Appointment::all();
+
+        return response()->json($this->templatingAppointments($data));
     }
 
     public function getClientAvailableAppointments()
     {
         $data = Appointment::where('client_id', null)->get();
 
-        foreach ($data as $appointment) {
-            $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
-        }
-
-        return response()->json($data);
+        return response()->json($this->templatingAppointments($data));
     }
 
     public function getClientScheduledAppointments()
     {
         $data = Appointment::where('client_id', auth()->id())->get();
 
-        foreach ($data as $appointment) {
-            $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
-        }
-
-        return response()->json($data);
+        return response()->json($this->templatingAppointments($data));
     }
 
     public function getDoctorScheduledAppointments()
     {
         $data = Appointment::where('doctor_id', auth()->id())->get();
 
-        foreach ($data as $appointment) {
-            $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
-
-            $client = User::find($appointment['client_id']);
-
-            if ($client !== null) {
-                $appointment['client_name'] = $client->name;
-            }
-
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
-        }
-
-        return response()->json($data);
+        return response()->json($this->templatingAppointments($data));
     }
 
     public function storeAppointment(Request $request)
