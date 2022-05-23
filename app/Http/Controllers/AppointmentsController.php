@@ -15,8 +15,15 @@ class AppointmentsController extends Controller
 
         foreach ($data as $appointment) {
             $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
+
+            $client = User::find($appointment['client_id']);
+
+            if ($client !== null) {
+                $appointment['client_name'] = $client->name;
+            }
+
+            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
+            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
         }
 
         return response()->json($data);
@@ -28,8 +35,8 @@ class AppointmentsController extends Controller
 
         foreach ($data as $appointment) {
             $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
+            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
+            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
         }
 
         return response()->json($data);
@@ -41,8 +48,8 @@ class AppointmentsController extends Controller
 
         foreach ($data as $appointment) {
             $appointment['doctor_name'] = User::find($appointment['doctor_id'])->name;
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
+            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
+            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
         }
 
         return response()->json($data);
@@ -61,8 +68,8 @@ class AppointmentsController extends Controller
                 $appointment['client_name'] = $client->name;
             }
 
-            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('D m H:i');
-            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('D m H:i');
+            $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('d.m.Y H:i');
+            $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('d.m.Y H:i');
         }
 
         return response()->json($data);

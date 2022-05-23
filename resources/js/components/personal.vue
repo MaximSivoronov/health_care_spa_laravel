@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-5">
 
         <!-- Personal page for client user -->
 
@@ -153,20 +153,32 @@
                             <table class="table appointments-table mt-3">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Client</th>
+                                    <th scope="col">Doctor_id</th>
+                                    <th scope="col">Doctor name</th>
+                                    <th scope="col">Client_id</th>
+                                    <th scope="col">Client name</th>
                                     <th scope="col">Beginning time</th>
                                     <th scope="col">Ending time</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Mark Otto</td>
-                                    <td>10:30</td>
-                                    <td>12:00</td>
+                                <tr v-for="appointment in user_appointments">
+                                    <td>{{ appointment.doctor_id }}</td>
+                                    <td>{{ appointment.doctor_name }}</td>
+                                    <td v-if="appointment.client_id">{{ appointment.client_id }}</td>
+                                    <td v-else>-</td>
+                                    <td v-if="appointment.client_name">{{ appointment.client_name }}</td>
+                                    <td v-else>No one scheduled yet</td>
+                                    <td>{{ appointment.beginning_time_formatted }}</td>
+                                    <td>{{ appointment.ending_time_formatted }}</td>
                                     <td>
-                                        <button class="btn btn-success">Chat</button>
-                                        <button class="btn btn-danger">Cancel</button>
+                                        <div>
+                                            <button class="btn btn-warning">Edit</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-danger">Delete</button>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -232,7 +244,8 @@ export default {
         setTimeout(() => {
             this.getUser();
             this.getClientAppointments();
-            this.getDoctorScheduledAppointments();
+            this.getDoctorAppointments();
+            this.getAdminAppointments();
         }, 300);
     },
 
@@ -257,10 +270,20 @@ export default {
                 }
             }, 300);
         },
-        getDoctorScheduledAppointments() {
+        getDoctorAppointments() {
             setTimeout(() => {
                 if (this.user.role === 'doctor') {
                     axios.get('/api/appointments/doctor/scheduled')
+                        .then(r => {
+                            this.user_appointments = r.data;
+                        })
+                }
+            }, 300);
+        },
+        getAdminAppointments() {
+            setTimeout(() => {
+                if (this.user.role === 'admin') {
+                    axios.get('/api/appointments/admin')
                         .then(r => {
                             this.user_appointments = r.data;
                         })

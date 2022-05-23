@@ -229,6 +229,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
@@ -246,7 +258,9 @@ __webpack_require__.r(__webpack_exports__);
 
       _this.getClientAppointments();
 
-      _this.getDoctorScheduledAppointments();
+      _this.getDoctorAppointments();
+
+      _this.getAdminAppointments();
     }, 300);
   },
   methods: {
@@ -271,13 +285,24 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, 300);
     },
-    getDoctorScheduledAppointments: function getDoctorScheduledAppointments() {
+    getDoctorAppointments: function getDoctorAppointments() {
       var _this4 = this;
 
       setTimeout(function () {
         if (_this4.user.role === 'doctor') {
           axios.get('/api/appointments/doctor/scheduled').then(function (r) {
             _this4.user_appointments = r.data;
+          });
+        }
+      }, 300);
+    },
+    getAdminAppointments: function getAdminAppointments() {
+      var _this5 = this;
+
+      setTimeout(function () {
+        if (_this5.user.role === 'admin') {
+          axios.get('/api/appointments/admin').then(function (r) {
+            _this5.user_appointments = r.data;
           });
         }
       }, 300);
@@ -795,7 +820,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "mb-5" }, [
     this.user.role === "client"
       ? _c("div", [
           _c("div", [
@@ -1004,12 +1029,54 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _vm._m(9),
+                  _c(
+                    "table",
+                    { staticClass: "table appointments-table mt-3" },
+                    [
+                      _vm._m(9),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.user_appointments, function (appointment) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(appointment.doctor_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(appointment.doctor_name))]),
+                            _vm._v(" "),
+                            appointment.client_id
+                              ? _c("td", [
+                                  _vm._v(_vm._s(appointment.client_id)),
+                                ])
+                              : _c("td", [_vm._v("-")]),
+                            _vm._v(" "),
+                            appointment.client_name
+                              ? _c("td", [
+                                  _vm._v(_vm._s(appointment.client_name)),
+                                ])
+                              : _c("td", [_vm._v("No one scheduled yet")]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(appointment.beginning_time_formatted)
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(appointment.ending_time_formatted)),
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(10, true),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
                 ]),
               ]),
             ]),
             _vm._v(" "),
-            _vm._m(10),
+            _vm._m(11),
           ]),
         ])
       : _vm._e(),
@@ -1126,33 +1193,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table appointments-table mt-3" }, [
-      _c("thead", [
-        _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Doctor_id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Doctor name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Client_id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Client name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", [
+        _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Edit")]),
       ]),
       _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("td", [_vm._v("Mark Otto")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("10:30")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("12:00")]),
-          _vm._v(" "),
-          _c("td", [
-            _c("button", { staticClass: "btn btn-success" }, [_vm._v("Chat")]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")]),
-          ]),
-        ]),
+      _c("div", [
+        _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")]),
       ]),
     ])
   },
