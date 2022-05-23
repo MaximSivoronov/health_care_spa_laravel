@@ -64,7 +64,7 @@ class AppointmentsController extends Controller
     public function storeAppointment(Request $request)
     {
         $data = [
-            'doctor_id' => $request['doctor_id'],
+            'doctor_id' => auth()->id(),
             'specialization' => $request['specialization'],
             'beginning_time' => Carbon::parse($request['beginning_time']),
             'ending_time' => Carbon::parse($request['ending_time']),
