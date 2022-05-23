@@ -221,6 +221,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
@@ -269,6 +277,7 @@ __webpack_require__.r(__webpack_exports__);
         if (_this4.user.role === 'doctor') {
           axios.get('/api/appointments/doctor/scheduled').then(function (r) {
             console.log(r.data);
+            _this4.user_appointments = r.data;
           });
         }
       }, 300);
@@ -789,116 +798,71 @@ var render = function () {
   return _c("div", [
     this.user.role === "client"
       ? _c("div", [
-          _c("div", { staticClass: "name-title" }, [
-            _c("h1", [_vm._v("Hello, " + _vm._s(this.user.name) + "!")]),
+          _c("div", [
+            _c("div", { staticClass: "name-title" }, [
+              _c("h1", [_vm._v("Hello, " + _vm._s(this.user.name) + "!")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("Glad to see you.")]),
+            ]),
             _vm._v(" "),
-            _c("h2", [_vm._v("Glad to see you.")]),
-          ]),
-          _vm._v(" "),
-          _c("h3", { staticClass: "mb-3" }, [
-            _vm._v("Your personal client id: " + _vm._s(this.user.id)),
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "card m-auto appointments mt-5" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table appointments-table mt-3" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.available_appointments, function (appointment) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(appointment.specialization))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(appointment.doctor_name))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(appointment.beginning_time_formatted)),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(appointment.ending_time_formatted))]),
-                _vm._v(" "),
-                _vm._m(3, true),
-              ])
-            }),
-            0
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    this.user.role === "doctor"
-      ? _c("div", [
-          _c("div", { staticClass: "name-title" }, [
-            _c("h1", [_vm._v("Hello, " + _vm._s(this.user.name) + "!")]),
+            _c("h3", { staticClass: "mb-3" }, [
+              _vm._v("Your personal client id: " + _vm._s(this.user.id)),
+            ]),
             _vm._v(" "),
-            _c("h2", [_vm._v("Glad to see you.")]),
+            _vm._m(0),
           ]),
           _vm._v(" "),
-          _c("h3", { staticClass: "mb-3" }, [
-            _vm._v("Your personal worker id: " + _vm._s(this.user.id)),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card m-auto appointments" }, [
-            _vm._m(4),
+          _c("div", { staticClass: "card m-auto appointments mt-5" }, [
+            _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "m-auto text-center" }, [
+              _c("table", { staticClass: "table appointments-table mt-3" }, [
+                _vm._m(2),
+                _vm._v(" "),
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function ($event) {
-                        $event.preventDefault()
-                        return _vm.redirectToCreateAppointment.apply(
-                          null,
-                          arguments
-                        )
-                      },
-                    },
-                  },
-                  [
-                    _vm._v(
-                      "Create new\n                        appointment\n                    "
-                    ),
-                  ]
+                  "tbody",
+                  _vm._l(_vm.available_appointments, function (appointment) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(appointment.specialization))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(appointment.doctor_name))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(appointment.beginning_time_formatted)),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(appointment.ending_time_formatted)),
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3, true),
+                    ])
+                  }),
+                  0
                 ),
               ]),
-              _vm._v(" "),
-              _vm._m(5),
             ]),
           ]),
         ])
       : _vm._e(),
     _vm._v(" "),
-    this.user.role === "admin"
+    this.user.role === "doctor"
       ? _c("div", [
-          _c("div", { staticClass: "name-title" }, [
-            _c("h1", [_vm._v("Hello, " + _vm._s(this.user.name) + "!")]),
-            _vm._v(" "),
-            _c("h2", [_vm._v("Glad to see you.")]),
-          ]),
-          _vm._v(" "),
-          _c("h3", { staticClass: "mb-3" }, [
-            _vm._v("Your personal admin id: " + _vm._s(this.user.id)),
-          ]),
-          _vm._v(" "),
           _c("div", [
+            _c("div", { staticClass: "name-title" }, [
+              _c("h1", [_vm._v("Hello, " + _vm._s(this.user.name) + "!")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("Glad to see you.")]),
+            ]),
+            _vm._v(" "),
+            _c("h3", { staticClass: "mb-3" }, [
+              _vm._v("Your personal worker id: " + _vm._s(this.user.id)),
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "card m-auto appointments" }, [
-              _vm._m(6),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("h3", { staticClass: "card-title pt-3" }, [
-                  _vm._v("All appointments:"),
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "m-auto text-center" }, [
                   _c(
                     "button",
@@ -922,12 +886,101 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _c("table", { staticClass: "table appointments-table mt-3" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.user_appointments, function (appointment) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(appointment.specialization))]),
+                        _vm._v(" "),
+                        appointment.client_name
+                          ? _c("td", [_vm._v(_vm._s(appointment.client_name))])
+                          : _c("td", [_vm._v("No one scheduled yet")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(appointment.beginning_time_formatted)),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(appointment.ending_time_formatted)),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          appointment.client_name
+                            ? _c("button", { staticClass: "btn btn-success" }, [
+                                _vm._v("Chat"),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("button", { staticClass: "btn btn-danger" }, [
+                            _vm._v("Cancel"),
+                          ]),
+                        ]),
+                      ])
+                    }),
+                    0
+                  ),
+                ]),
               ]),
             ]),
           ]),
-          _vm._v(" "),
-          _vm._m(8),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    this.user.role === "admin"
+      ? _c("div", [
+          _c("div", [
+            _c("div", { staticClass: "name-title" }, [
+              _c("h1", [_vm._v("Hello, " + _vm._s(this.user.name) + "!")]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("Glad to see you.")]),
+            ]),
+            _vm._v(" "),
+            _c("h3", { staticClass: "mb-3" }, [
+              _vm._v("Your personal admin id: " + _vm._s(this.user.id)),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", { staticClass: "card m-auto appointments" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h3", { staticClass: "card-title pt-3" }, [
+                    _vm._v("All appointments:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "m-auto text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.redirectToCreateAppointment.apply(
+                              null,
+                              arguments
+                            )
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "Create new\n                                appointment\n                            "
+                        ),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(7),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _vm._m(8),
+          ]),
         ])
       : _vm._e(),
   ])
@@ -1029,33 +1082,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table appointments-table mt-3" }, [
-      _c("thead", [
-        _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("td", [_vm._v("Mark Otto")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("10:30")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("12:00")]),
-          _vm._v(" "),
-          _c("td", [
-            _c("button", { staticClass: "btn btn-success" }, [_vm._v("Chat")]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")]),
-          ]),
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialization")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Client")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Beginning time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ending time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
       ]),
     ])
   },
