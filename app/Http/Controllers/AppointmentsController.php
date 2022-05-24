@@ -99,4 +99,15 @@ class AppointmentsController extends Controller
 
         return response()->json('updated');
     }
+
+    public function unsubscribeClient(Appointment $appointment)
+    {
+        $data = [
+            'client_id' => null,
+        ];
+
+        $appointment->update($data);
+
+        return response()->json('client was unsubscribed!');
+    }
 }

@@ -324,6 +324,11 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, 300);
     },
+    unsubscribeClient: function unsubscribeClient(id) {
+      axios.patch("/api/appointments/".concat(id, "/unsubscribe")).then(function (r) {
+        console.log(r.data);
+      });
+    },
     deleteAppointment: function deleteAppointment(id) {
       var _this7 = this;
 
@@ -889,7 +894,21 @@ var render = function () {
                           _vm._v(_vm._s(appointment.ending_time_formatted)),
                         ]),
                         _vm._v(" "),
-                        _vm._m(2, true),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.unsubscribeClient(appointment.id)
+                                },
+                              },
+                            },
+                            [_vm._v("Cancel")]
+                          ),
+                        ]),
                       ])
                     }),
                     0
@@ -900,11 +919,11 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card m-auto appointments mt-5" }, [
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("table", { staticClass: "table appointments-table mt-3" }, [
-                _vm._m(4),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -922,7 +941,7 @@ var render = function () {
                         _vm._v(_vm._s(appointment.ending_time_formatted)),
                       ]),
                       _vm._v(" "),
-                      _vm._m(5, true),
+                      _vm._m(4, true),
                     ])
                   }),
                   0
@@ -947,7 +966,7 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card m-auto appointments" }, [
-              _vm._m(6),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "m-auto text-center" }, [
@@ -974,7 +993,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("table", { staticClass: "table appointments-table mt-3" }, [
-                  _vm._m(7),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -1031,7 +1050,7 @@ var render = function () {
             _vm._v(" "),
             _c("div", [
               _c("div", { staticClass: "card m-auto appointments" }, [
-                _vm._m(8),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("h3", { staticClass: "card-title pt-3" }, [
@@ -1065,7 +1084,7 @@ var render = function () {
                     "table",
                     { staticClass: "table appointments-table mt-3" },
                     [
-                      _vm._m(9),
+                      _vm._m(8),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -1150,7 +1169,7 @@ var render = function () {
             _vm._v(" "),
             _c("div", { staticClass: "mt-5" }, [
               _c("div", { staticClass: "card m-auto appointments" }, [
-                _vm._m(10),
+                _vm._m(9),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("h3", { staticClass: "card-title pt-3" }, [
@@ -1161,7 +1180,7 @@ var render = function () {
                     "table",
                     { staticClass: "table appointments-table mt-3" },
                     [
-                      _vm._m(11),
+                      _vm._m(10),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -1175,7 +1194,7 @@ var render = function () {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.role))]),
                             _vm._v(" "),
-                            _vm._m(12, true),
+                            _vm._m(11, true),
                           ])
                         }),
                         0
@@ -1215,14 +1234,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Cancel")]),
     ])
   },
   function () {

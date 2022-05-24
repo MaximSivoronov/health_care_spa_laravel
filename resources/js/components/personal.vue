@@ -35,7 +35,7 @@
                                 <td>{{ appointment.beginning_time_formatted }}</td>
                                 <td>{{ appointment.ending_time_formatted }}</td>
                                 <td>
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button class="btn btn-danger" @click.prevent="unsubscribeClient(appointment.id)">Cancel</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -306,6 +306,12 @@ export default {
                         });
                 }
             }, 300);
+        },
+        unsubscribeClient(id) {
+            axios.patch(`/api/appointments/${id}/unsubscribe`)
+                .then(r => {
+                    console.log(r.data);
+                });
         },
         deleteAppointment(id) {
             axios.delete(`/api/appointments/${id}`)
