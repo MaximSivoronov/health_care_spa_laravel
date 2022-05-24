@@ -100,6 +100,17 @@ class AppointmentsController extends Controller
         return response()->json('updated');
     }
 
+    public function subscribeClient(Appointment $appointment, Request $request)
+    {
+        $data = [
+            'client_id' => $request['client_id'],
+        ];
+
+        $appointment->update($data);
+
+        return response()->json('client was subscribed!');
+    }
+
     public function unsubscribeClient(Appointment $appointment)
     {
         $data = [

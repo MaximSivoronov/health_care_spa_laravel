@@ -29,5 +29,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete('/appointments/{appointment}', [\App\Http\Controllers\AppointmentsController::class, 'deleteAppointment']);
     Route::get('/appointments/{appointment}/edit', [\App\Http\Controllers\AppointmentsController::class, 'editAppointment']);
     Route::patch('/appointments/{appointment}', [\App\Http\Controllers\AppointmentsController::class, 'updateAppointment']);
+    Route::patch('/appointments/{appointment}/subscribe', [\App\Http\Controllers\AppointmentsController::class, 'subscribeClient']);
     Route::patch('/appointments/{appointment}/unsubscribe', [\App\Http\Controllers\AppointmentsController::class, 'unsubscribeClient']);
 });

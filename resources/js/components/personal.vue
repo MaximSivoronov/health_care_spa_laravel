@@ -35,7 +35,9 @@
                                 <td>{{ appointment.beginning_time_formatted }}</td>
                                 <td>{{ appointment.ending_time_formatted }}</td>
                                 <td>
-                                    <button class="btn btn-danger" @click.prevent="unsubscribeClient(appointment.id)">Cancel</button>
+                                    <button class="btn btn-danger" @click.prevent="unsubscribeClient(appointment.id)">
+                                        Cancel
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -68,7 +70,9 @@
                             <td>{{ appointment.beginning_time_formatted }}</td>
                             <td>{{ appointment.ending_time_formatted }}</td>
                             <td>
-                                <button class="btn btn-success">Register</button>
+                                <button class="btn btn-success" @click.prevent="subscribeClient(appointment.id)">
+                                    Register
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -176,10 +180,14 @@
                                     <td>{{ appointment.ending_time_formatted }}</td>
                                     <td>
                                         <div>
-                                            <button @click.prevent="redirectToeditAppointment(appointment.id)" class="btn btn-warning">Edit</button>
+                                            <button @click.prevent="redirectToeditAppointment(appointment.id)"
+                                                    class="btn btn-warning">Edit
+                                            </button>
                                         </div>
                                         <div>
-                                            <button @click.prevent="deleteAppointment(appointment.id)" class="btn btn-danger">Delete</button>
+                                            <button @click.prevent="deleteAppointment(appointment.id)"
+                                                    class="btn btn-danger">Delete
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -307,10 +315,16 @@ export default {
                 }
             }, 300);
         },
+        subscribeClient(id) {
+            axios.patch(`/api/appointments/${id}/subscribe`, {client_id: this.user.id})
+                .then(r => {
+                    this.getClientAppointments();
+                });
+        },
         unsubscribeClient(id) {
             axios.patch(`/api/appointments/${id}/unsubscribe`)
                 .then(r => {
-                    console.log(r.data);
+                    this.getClientAppointments();
                 });
         },
         deleteAppointment(id) {
