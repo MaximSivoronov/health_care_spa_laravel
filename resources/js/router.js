@@ -9,10 +9,6 @@ const router = new VueRouter({
 
     routes: [
         {
-            path: '/debug/get', component: () => import('./components/debug/get'),
-            name: 'debug/get',
-        },
-        {
             path: '/user/login', component: () => import('./components/login'),
             name: 'user.login',
         },
@@ -33,11 +29,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x-xsrf-token');
-    let user = store.getters.user;
-
-    // Debug logs.
-    // console.log(token);
-    // console.log(user);
 
     if (!token) {
         if (to.name === 'user.login' || to.name === 'user.register') {

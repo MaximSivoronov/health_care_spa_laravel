@@ -1,6 +1,5 @@
 <template>
     <div>
-        <router-link :to="{ name: 'debug/get' }">Debug get</router-link>
         <router-link v-if="!token" :to="{ name: 'user.login' }">Login</router-link>
         <router-link v-if="!token" :to="{ name: 'user.register' }">Sign up</router-link>
         <router-link v-if="token" :to="{ name: 'user.personal' }">Personal</router-link>
