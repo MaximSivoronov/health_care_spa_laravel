@@ -77,20 +77,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     createAppointment: function createAppointment() {
+      var _this = this;
+
       axios.post('/api/appointments', {
         doctor_id: this.doctor_id ? this.doctor_id : this.user.id,
         specialization: this.specialization,
         beginning_time: this.beginning_time,
         ending_time: this.ending_time
       }).then(function (r) {
-        console.log(r.data);
+        _this.redirectToPersonal();
       });
     },
     getUser: function getUser() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/user').then(function (r) {
-        _this.user = r.data;
+        _this2.user = r.data;
+      });
+    },
+    redirectToPersonal: function redirectToPersonal() {
+      this.$router.push({
+        name: 'user.personal'
       });
     }
   }

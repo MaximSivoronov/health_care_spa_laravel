@@ -74,7 +74,7 @@ export default {
                 beginning_time: this.beginning_time,
                 ending_time: this.ending_time,
             }).then(r => {
-                console.log(r.data);
+                this.redirectToPersonal();
             });
         },
 
@@ -83,7 +83,11 @@ export default {
                 .then(r => {
                     this.user = r.data;
                 });
-        }
+        },
+
+        redirectToPersonal() {
+            this.$router.push({name: 'user.personal'});
+        },
     },
 }
 </script>
