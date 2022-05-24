@@ -251,6 +251,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
@@ -352,7 +354,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this9 = this;
 
       axios["delete"]("/api/appointments/".concat(id)).then(function (r) {
-        _this9.getAdminAppointments();
+        if (_this9.user.role === 'admin') {
+          _this9.getAdminAppointments();
+        }
+
+        if (_this9.user.role === 'doctor') {
+          _this9.getDoctorAppointments();
+        }
       });
     },
     redirectToeditAppointment: function redirectToeditAppointment(id) {
@@ -1061,9 +1069,23 @@ var render = function () {
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("button", { staticClass: "btn btn-danger" }, [
-                            _vm._v("Cancel"),
-                          ]),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.deleteAppointment(appointment.id)
+                                },
+                              },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    Cancel\n                                "
+                              ),
+                            ]
+                          ),
                         ]),
                       ])
                     }),

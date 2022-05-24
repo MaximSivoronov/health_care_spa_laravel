@@ -119,7 +119,9 @@
                                 <td>{{ appointment.ending_time_formatted }}</td>
                                 <td>
                                     <button v-if="appointment.client_name" class="btn btn-success">Chat</button>
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button class="btn btn-danger" @click.prevent="deleteAppointment(appointment.id)">
+                                        Cancel
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -330,7 +332,12 @@ export default {
         deleteAppointment(id) {
             axios.delete(`/api/appointments/${id}`)
                 .then(r => {
-                    this.getAdminAppointments();
+                    if (this.user.role === 'admin') {
+                        this.getAdminAppointments();
+                    }
+                    if (this.user.role === 'doctor') {
+                        this.getDoctorAppointments();
+                    }
                 });
         },
         redirectToeditAppointment(id) {
