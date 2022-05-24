@@ -253,6 +253,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
@@ -1068,6 +1071,22 @@ var render = function () {
                                 _vm._v("Chat"),
                               ])
                             : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning",
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.redirectToeditAppointment(
+                                    appointment.id
+                                  )
+                                },
+                              },
+                            },
+                            [_vm._v("Edit\n                                ")]
+                          ),
                           _vm._v(" "),
                           _c(
                             "button",

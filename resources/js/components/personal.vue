@@ -119,6 +119,9 @@
                                 <td>{{ appointment.ending_time_formatted }}</td>
                                 <td>
                                     <button v-if="appointment.client_name" class="btn btn-success">Chat</button>
+                                    <button @click.prevent="redirectToeditAppointment(appointment.id)"
+                                            class="btn btn-warning">Edit
+                                    </button>
                                     <button class="btn btn-danger" @click.prevent="deleteAppointment(appointment.id)">
                                         Cancel
                                     </button>
