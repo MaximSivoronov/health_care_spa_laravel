@@ -48,7 +48,7 @@
                                 <td>{{ appointment.ending_time_formatted }}</td>
                                 <td>
                                     <div>
-                                        <button @click.prevent="$parent.redirectToeditAppointment(appointment.id)"
+                                        <button @click.prevent="$parent.redirectToEditAppointment(appointment.id)"
                                                 class="btn btn-warning">Edit
                                         </button>
                                     </div>

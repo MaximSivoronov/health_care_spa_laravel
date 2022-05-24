@@ -131,7 +131,7 @@ export default {
                     }
                 });
         },
-        redirectToeditAppointment(id) {
+        redirectToEditAppointment(id) {
             this.$router.push({name: 'appointment.edit', params: {id: id}});
         },
         redirectToCreateAppointment() {

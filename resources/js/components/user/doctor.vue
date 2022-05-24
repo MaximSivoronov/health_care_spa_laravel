@@ -36,7 +36,7 @@
                             <td>{{ appointment.ending_time_formatted }}</td>
                             <td>
                                 <button v-if="appointment.client_name" class="btn btn-success">Chat</button>
-                                <button @click.prevent="$parent.redirectToeditAppointment(appointment.id)"
+                                <button @click.prevent="$parent.redirectToEditAppointment(appointment.id)"
                                         class="btn btn-warning">Edit
                                 </button>
                                 <button class="btn btn-danger"
