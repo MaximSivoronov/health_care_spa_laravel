@@ -53,6 +53,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "create",
   data: function data() {
@@ -60,7 +68,8 @@ __webpack_require__.r(__webpack_exports__);
       specialization: '',
       beginning_time: null,
       ending_time: null,
-      user: null
+      user: {},
+      doctor_id: null
     };
   },
   mounted: function mounted() {
@@ -68,8 +77,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     createAppointment: function createAppointment() {
-      axios.post('/api/appointment', {
-        doctor_id: this.user.id,
+      axios.post('/api/appointments', {
+        doctor_id: this.doctor_id ? this.doctor_id : this.user.id,
         specialization: this.specialization,
         beginning_time: this.beginning_time,
         ending_time: this.ending_time
@@ -80,9 +89,9 @@ __webpack_require__.r(__webpack_exports__);
     getUser: function getUser() {
       var _this = this;
 
-      setTimeout(function () {
-        _this.user = _this.$store.getters.user;
-      }, 300);
+      axios.get('/api/user').then(function (r) {
+        _this.user = r.data;
+      });
     }
   }
 });
@@ -597,6 +606,40 @@ var render = function () {
     _vm._v(" "),
     _c("div", { staticClass: "card-body p-3" }, [
       _c("form", [
+        this.user.role === "admin"
+          ? _c("div", { staticClass: "form-group mb-3" }, [
+              _c("label", { attrs: { for: "doctor_id" } }, [
+                _vm._v("Enter doctor_id"),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.doctor_id,
+                    expression: "doctor_id",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "doctor_id",
+                  placeholder: "doctor_id",
+                },
+                domProps: { value: _vm.doctor_id },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.doctor_id = $event.target.value
+                  },
+                },
+              }),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group mb-3" }, [
           _c("label", { attrs: { for: "specialization" } }, [
             _vm._v("Enter your specialization"),

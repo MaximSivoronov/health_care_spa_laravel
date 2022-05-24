@@ -6,6 +6,14 @@
         <div class="card-body p-3">
             <form>
 
+                <!-- Doctor_id -->
+
+                <div v-if="this.user.role === 'admin'" class="form-group mb-3">
+                    <label for="doctor_id">Enter doctor_id</label>
+                    <input v-model="doctor_id" type="text" class="form-control" id="doctor_id"
+                           placeholder="doctor_id">
+                </div>
+
                 <!-- Specialization -->
 
                 <div class="form-group mb-3">
@@ -49,7 +57,8 @@ export default {
             specialization: '',
             beginning_time: null,
             ending_time: null,
-            user: null,
+            user: {},
+            doctor_id: null,
         }
     },
 
@@ -59,20 +68,21 @@ export default {
 
     methods: {
         createAppointment() {
-            axios.post('/api/appointment', {
-                doctor_id: this.user.id,
+            axios.post('/api/appointments', {
+                doctor_id: this.doctor_id ? this.doctor_id : this.user.id,
                 specialization: this.specialization,
                 beginning_time: this.beginning_time,
                 ending_time: this.ending_time,
             }).then(r => {
                 console.log(r.data);
-            })
+            });
         },
 
         getUser() {
-            setTimeout(() => {
-                this.user = this.$store.getters.user;
-            }, 300);
+            axios.get('/api/user')
+                .then(r => {
+                    this.user = r.data;
+                });
         }
     },
 }

@@ -5384,33 +5384,29 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       token: '',
-      user: ''
+      user: {}
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    setTimeout(function () {
-      _this.setupUser();
-    }, 300);
+    this.setupUser();
   },
   updated: function updated() {
     this.getToken();
   },
   methods: {
     logout: function logout() {
-      var _this2 = this;
+      var _this = this;
 
       axios.post('/logout').then(function (r) {
         // Delete token and user.
         localStorage.removeItem('x-xsrf-token');
-        _this2.user = null;
-        _this2.token = null; // Reset user in vuex.
+        _this.user = null;
+        _this.token = null; // Reset user in vuex.
 
-        _this2.$store.dispatch('setUser', ''); // Redirect to login page.
+        _this.$store.dispatch('setUser', ''); // Redirect to login page.
 
 
-        _this2.$router.push({
+        _this.$router.push({
           name: 'user.login'
         });
       });
@@ -5419,14 +5415,14 @@ __webpack_require__.r(__webpack_exports__);
       this.token = localStorage.getItem('x-xsrf-token');
     },
     setupUser: function setupUser() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.getToken();
       setTimeout(function () {
         if (localStorage.getItem('x-xsrf-token')) {
           setTimeout(function () {
             axios.get('/api/user').then(function (r) {
-              _this3.user = r.data;
+              _this2.user = r.data;
             });
           }, 300);
         }

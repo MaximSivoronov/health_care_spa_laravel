@@ -16,14 +16,12 @@ export default {
     data() {
         return {
             token: '',
-            user: '',
+            user: {},
         }
     },
 
     mounted() {
-        setTimeout(() => {
-            this.setupUser();
-        }, 300);
+        this.setupUser();
     },
 
     updated() {
