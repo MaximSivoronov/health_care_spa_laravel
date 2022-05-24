@@ -241,6 +241,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "personal",
   data: function data() {
@@ -266,6 +268,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.getAllUsers();
     }, 300);
   },
+  updated: function updated() {},
   methods: {
     getUser: function getUser() {
       var _this2 = this;
@@ -320,6 +323,13 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       }, 300);
+    },
+    deleteAppointment: function deleteAppointment(id) {
+      var _this7 = this;
+
+      axios["delete"]("/api/appointments/".concat(id)).then(function (r) {
+        _this7.getAdminAppointments();
+      });
     },
     redirectToCreateAppointment: function redirectToCreateAppointment() {
       this.$router.push({
@@ -1053,6 +1063,10 @@ var render = function () {
                         "tbody",
                         _vm._l(_vm.user_appointments, function (appointment) {
                           return _c("tr", [
+                            _c("td", [
+                              _vm._v(_vm._s(appointment.specialization)),
+                            ]),
+                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(appointment.doctor_id))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(appointment.doctor_name))]),
@@ -1079,7 +1093,27 @@ var render = function () {
                               _vm._v(_vm._s(appointment.ending_time_formatted)),
                             ]),
                             _vm._v(" "),
-                            _vm._m(10, true),
+                            _c("td", [
+                              _vm._m(10, true),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.deleteAppointment(
+                                          appointment.id
+                                        )
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("Delete")]
+                                ),
+                              ]),
+                            ]),
                           ])
                         }),
                         0
@@ -1245,6 +1279,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Specialization")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Doctor_id")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Doctor name")]),
@@ -1265,14 +1301,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", [
-        _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Edit")]),
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")]),
-      ]),
+    return _c("div", [
+      _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Edit")]),
     ])
   },
   function () {

@@ -153,6 +153,7 @@
                             <table class="table appointments-table mt-3">
                                 <thead>
                                 <tr>
+                                    <th scope="col">Specialization</th>
                                     <th scope="col">Doctor_id</th>
                                     <th scope="col">Doctor name</th>
                                     <th scope="col">Client_id</th>
@@ -164,6 +165,7 @@
                                 </thead>
                                 <tbody>
                                 <tr v-for="appointment in user_appointments">
+                                    <td>{{ appointment.specialization }}</td>
                                     <td>{{ appointment.doctor_id }}</td>
                                     <td>{{ appointment.doctor_name }}</td>
                                     <td v-if="appointment.client_id">{{ appointment.client_id }}</td>
@@ -177,7 +179,7 @@
                                             <button class="btn btn-warning">Edit</button>
                                         </div>
                                         <div>
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button @click.prevent="deleteAppointment(appointment.id)" class="btn btn-danger">Delete</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -251,6 +253,9 @@ export default {
         }, 300);
     },
 
+    updated() {
+    },
+
     methods: {
         getUser() {
             axios.get('/api/user')
@@ -301,6 +306,12 @@ export default {
                         });
                 }
             }, 300);
+        },
+        deleteAppointment(id) {
+            axios.delete(`/api/appointments/${id}`)
+                .then(r => {
+                    this.getAdminAppointments();
+                });
         },
         redirectToCreateAppointment() {
             this.$router.push({name: 'appointment.create'});
