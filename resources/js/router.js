@@ -24,6 +24,10 @@ const router = new VueRouter({
             path: '/appointment/create', component: () => import('./components/appointment/create'),
             name: 'appointment.create',
         },
+        {
+            path: '/appointment/:id/edit', component: () => import('./components/appointment/edit'),
+            name: 'appointment.edit',
+        },
     ],
 });
 

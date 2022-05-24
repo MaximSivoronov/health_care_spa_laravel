@@ -176,7 +176,7 @@
                                     <td>{{ appointment.ending_time_formatted }}</td>
                                     <td>
                                         <div>
-                                            <button class="btn btn-warning">Edit</button>
+                                            <button @click.prevent="redirectToeditAppointment(appointment.id)" class="btn btn-warning">Edit</button>
                                         </div>
                                         <div>
                                             <button @click.prevent="deleteAppointment(appointment.id)" class="btn btn-danger">Delete</button>
@@ -312,6 +312,9 @@ export default {
                 .then(r => {
                     this.getAdminAppointments();
                 });
+        },
+        redirectToeditAppointment(id) {
+            this.$router.push({name: 'appointment.edit', params: {id: id}});
         },
         redirectToCreateAppointment() {
             this.$router.push({name: 'appointment.create'});

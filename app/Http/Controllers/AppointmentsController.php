@@ -77,4 +77,26 @@ class AppointmentsController extends Controller
 
         return response()->json('Appointment was deleted');
     }
+
+    public function editAppointment(Appointment $appointment)
+    {
+        $appointment['beginning_time_formatted'] = Carbon::parse($appointment['beginning_time'])->format('Y-m-d\TH:i');
+        $appointment['ending_time_formatted'] = Carbon::parse($appointment['ending_time'])->format('Y-m-d\TH:i');
+
+        return response()->json($appointment);
+    }
+
+    public function updateAppointment(Appointment $appointment, Request $request)
+    {
+        $data = [
+            'doctor_id' => $request['doctor_id'],
+            'specialization' => $request['specialization'],
+            'beginning_time' => Carbon::parse($appointment['beginning_time']),
+            'ending_time' => Carbon::parse($appointment['ending_time']),
+        ];
+
+        $appointment->update($data);
+
+        return response()->json('updated');
+    }
 }
