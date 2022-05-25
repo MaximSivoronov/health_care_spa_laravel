@@ -91,8 +91,8 @@ class AppointmentsController extends Controller
         $data = [
             'doctor_id' => $request['doctor_id'],
             'specialization' => $request['specialization'],
-            'beginning_time' => Carbon::parse($appointment['beginning_time']),
-            'ending_time' => Carbon::parse($appointment['ending_time']),
+            'beginning_time' => Carbon::parse($request['beginning_time']),
+            'ending_time' => Carbon::parse($request['ending_time']),
         ];
 
         $appointment->update($data);

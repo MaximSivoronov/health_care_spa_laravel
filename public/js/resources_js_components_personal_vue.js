@@ -161,7 +161,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    redirectToeditAppointment: function redirectToeditAppointment(id) {
+    redirectToEditAppointment: function redirectToEditAppointment(id) {
       this.$router.push({
         name: 'appointment.edit',
         params: {
@@ -1531,7 +1531,7 @@ var render = function () {
                             on: {
                               click: function ($event) {
                                 $event.preventDefault()
-                                return _vm.$parent.redirectToeditAppointment(
+                                return _vm.$parent.redirectToEditAppointment(
                                   appointment.id
                                 )
                               },
@@ -1958,7 +1958,7 @@ var render = function () {
                         on: {
                           click: function ($event) {
                             $event.preventDefault()
-                            return _vm.$parent.redirectToeditAppointment(
+                            return _vm.$parent.redirectToEditAppointment(
                               appointment.id
                             )
                           },
