@@ -16,4 +16,22 @@ class UserController extends Controller
     {
         return response()->json(User::all());
     }
+
+    public function editUser(User $user)
+    {
+        return response()->json($user);
+    }
+
+    public function updateUser(User $user, Request $request)
+    {
+        $data = [
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => $request['role'],
+        ];
+
+        $user->update($data);
+
+        return response()->json('user was updated!');
+    }
 }

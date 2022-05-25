@@ -92,7 +92,7 @@
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.role }}</td>
                                 <td>
-                                    <button class="btn btn-warning">Change role</button>
+                                    <button class="btn btn-warning" @click.prevent="$parent.redirectToEditUser(user.id)">Edit</button>
                                     <button class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>

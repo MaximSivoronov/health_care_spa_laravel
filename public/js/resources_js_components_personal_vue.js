@@ -173,6 +173,14 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'appointment.create'
       });
+    },
+    redirectToEditUser: function redirectToEditUser(id) {
+      this.$router.push({
+        name: 'user.edit',
+        params: {
+          id: id
+        }
+      });
     }
   }
 });
@@ -1596,7 +1604,25 @@ var render = function () {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.role))]),
                     _vm._v(" "),
-                    _vm._m(4, true),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning",
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.$parent.redirectToEditUser(user.id)
+                            },
+                          },
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                      _vm._v(" "),
+                      _c("button", { staticClass: "btn btn-danger" }, [
+                        _vm._v("Delete"),
+                      ]),
+                    ]),
                   ])
                 }),
                 0
@@ -1665,16 +1691,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Change role")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")]),
     ])
   },
 ]

@@ -136,7 +136,10 @@ export default {
         },
         redirectToCreateAppointment() {
             this.$router.push({name: 'appointment.create'});
-        }
+        },
+        redirectToEditUser(id) {
+            this.$router.push({name: 'user.edit', params: {id: id}});
+        },
     },
 }
 </script>

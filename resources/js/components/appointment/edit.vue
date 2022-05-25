@@ -1,7 +1,7 @@
 <template>
     <div class="card m-auto appointment-card">
         <div class="card-header text-center pt-3">
-            <h2>Create new appointment</h2>
+            <h2>Edit appointment</h2>
         </div>
         <div class="card-body p-3">
             <form>
