@@ -1,64 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Single Page Application на Laravel 9 и Vue 2.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## При создании приложения я использовал:
 
-## About Laravel
+- `Laravel 9.11.0` в качестве Backend framework
+- `Vue 2.6` в качестве Frontend framework
+- `Vuex` для хранения данных Vue приложения
+- `Vue Router 3.5.3` в качетве роутера для SPA
+- `Axios` для ассинхронных запросов к api
+- `Laravel Sanctum` аутентефикация пользователя в SPA
+- `SQLITE` как база данных
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Что может это приложение:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Вообще это приложение я создавал не для того чтобы сделать что-то действительно полезное.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Проект делал чтобы закрепить у себя в голове те концепции которые я получил в процессе самообучения Laravel и Vue.
 
-## Learning Laravel
+Проект представляет собой некий CRUD на который пользователи с разными ролями могут по разному влиять.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Всего есть три роли пользователя: Клиет, Доктор и Администратор.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Клиент может записаться на доступные приемы, и отписаться от ранее забронированных.
+- Доктор может создавать и редактировать свои приемы.
+- Администратор может редактировать все приемы всех врачей и изменять информацию о пользователях.
 
-## Laravel Sponsors
+У самой записи к врачу есть поля для хранения id доктора который создал эту запись и поле для хранения id клиента который записался к врачу 
+(эта колонка так же может быть пустой если никто еще не записался на прием).
+## Что я планирую сделать дальше:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Валидацию всех форм;
+- Проверку на даты (чтобы невозможно было создать запись в которой дата начала больше даты окончания);
+- Возможность написать своему врачу (внедрить чат который я писал не так давно).
 
-### Premium Partners
+## Какие были подводные камни:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Работа с таймаутами;
+- Конвертация даты при создании и редактировании записей.
+- При обновлении страницы Vuex тоже обновляется, поэтому я решил от него отказаться и получать доступ к авторизированному пользователю через api, что привело к частому повторению одного и того же кода.
 
-## Contributing
+## Как запустить приложение на локальной машине:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Клонируйте репозиторий.
+2. В командной строке исплользуйте команду `composer install`.
+3. Затем команда `npm i` или `npm install`.
+4. Создайте `.env` файл и скопируйте в него содержимое `.env.example`. 
+5. Настройте работу со своей базой данных и запустите `php artisan migrate`.
+6. Используйте команду `php artisan db:seed`, это создаст одного пользователя с ролью админа.
+7. В командной строке запустите `php artisan serve` и `npm run dev` или `npm run watch`.
