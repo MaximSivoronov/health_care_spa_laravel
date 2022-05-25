@@ -2215,9 +2215,7 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("h3", { staticClass: "mb-3 text-center" }, [
-          _vm._v(
-            "Your privilege level: " + _vm._s(this.user.role.toUpperCase())
-          ),
+          _vm._v("Your privilege level: " + _vm._s(this.user.role)),
         ]),
       ]),
     ]),

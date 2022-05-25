@@ -26,7 +26,9 @@
                 <!-- Submit button -->
 
                 <div class="m-auto text-center">
-                    <button :disabled="!isDisabled" @click.prevent="login" type="submit" class="btn btn-primary login-button">Login</button>
+                    <button :disabled="!isDisabled" @click.prevent="login" type="submit"
+                            class="btn btn-primary login-button">Login
+                    </button>
                 </div>
             </form>
         </div>

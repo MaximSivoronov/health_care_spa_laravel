@@ -11,7 +11,7 @@
             <div class="card-body">
                 <h3 class="mb-3 text-center">Your personal id: {{ this.user.id }}</h3>
                 <h3 class="mb-3 text-center">Your email: {{ this.user.email }}</h3>
-                <h3 class="mb-3 text-center">Your privilege level: {{ this.user.role.toUpperCase() }}</h3>
+                <h3 class="mb-3 text-center">Your privilege level: {{ this.user.role }}</h3>
             </div>
         </div>
     </div>
