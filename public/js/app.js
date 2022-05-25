@@ -5591,9 +5591,22 @@ router.beforeEach(function (to, from, next) {
         name: 'user.personal'
       });
     }
-
-    return next();
   }
+
+  axios.get('/api/user').then(function (r) {
+    var userRole = r.data.role;
+
+    if (userRole === 'admin' && to.name === 'user.edit') {
+      return next();
+    } else if ((userRole === 'admin' || userRole === 'doctor') && (to.name === 'appointment.create' || to.name === 'appointment.edit')) {
+      return next();
+    } else {
+      return next({
+        name: 'user.personal'
+      });
+    }
+  });
+  return next();
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 

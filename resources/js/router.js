@@ -37,20 +37,36 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x-xsrf-token');
-
     if (!token) {
         if (to.name === 'user.login' || to.name === 'user.register') {
             return next();
         }
 
         return next({name: 'user.login'});
-    } else {
+
+    }
+    else {
         if (to.name === 'user.login' || to.name === 'user.register') {
             return next({name: 'user.personal'});
         }
-
-        return next();
     }
+    axios.get('/api/user')
+        .then(r => {
+            const userRole = r.data.role;
+
+            if (userRole === 'admin' && to.name === 'user.edit') {
+                return next();
+            }
+            else if ((userRole === 'admin' || userRole === 'doctor') &&
+                (to.name === 'appointment.create' || to.name === 'appointment.edit')) {
+                return next();
+            }
+            else {
+                return next({name: 'user.personal'});
+            }
+        })
+
+    return next();
 });
 
 export default router;
