@@ -84,8 +84,13 @@ __webpack_require__.r(__webpack_exports__);
           password: _this.password,
           password_confirmation: _this.password_confirmation
         }).then(function (r) {
-          console.log(r);
+          _this.redirectToLogin();
         });
+      });
+    },
+    redirectToLogin: function redirectToLogin() {
+      this.$router.push({
+        name: 'user.login'
       });
     }
   }

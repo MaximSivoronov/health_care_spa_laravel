@@ -74,7 +74,6 @@ __webpack_require__.r(__webpack_exports__);
 
       setTimeout(function () {
         axios.get("/api/users/".concat(_this.$route.params.id, "/edit")).then(function (r) {
-          console.log(r.data);
           _this.user = r.data;
         });
       }, 300);

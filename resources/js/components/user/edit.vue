@@ -64,7 +64,6 @@ export default {
             setTimeout(() => {
                 axios.get(`/api/users/${this.$route.params.id}/edit`)
                     .then(r => {
-                        console.log(r.data);
                         this.user = r.data;
                     })
             }, 300);

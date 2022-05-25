@@ -72,9 +72,12 @@ export default {
                     password: this.password,
                     password_confirmation: this.password_confirmation,
                 }).then(r => {
-                    console.log(r);
+                    this.redirectToLogin();
                 });
             });
+        },
+        redirectToLogin() {
+            this.$router.push({name: 'user.login'});
         },
     },
 }
