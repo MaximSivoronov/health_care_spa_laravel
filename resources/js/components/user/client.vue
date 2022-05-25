@@ -1,11 +1,6 @@
 <template>
     <div>
         <div>
-            <div class="name-title">
-                <h1>Hello, {{ this.user.name }}!</h1>
-                <h2>Glad to see you.</h2>
-            </div>
-            <h3 class="mb-3">Your personal client id: {{ this.user.id }}</h3>
 
             <!-- Current scheduled appointments -->
 
@@ -31,7 +26,8 @@
                             <td>{{ appointment.beginning_time_formatted }}</td>
                             <td>{{ appointment.ending_time_formatted }}</td>
                             <td>
-                                <button class="btn btn-danger" @click.prevent="$parent.unsubscribeClient(appointment.id)">
+                                <button class="btn btn-danger"
+                                        @click.prevent="$parent.unsubscribeClient(appointment.id)">
                                     Cancel
                                 </button>
                             </td>
@@ -91,9 +87,6 @@ export default {
 </script>
 
 <style scoped>
-.name-title {
-    text-align: center;
-}
 
 .appointments {
     display: flex;

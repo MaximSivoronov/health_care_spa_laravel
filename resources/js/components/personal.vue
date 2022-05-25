@@ -1,6 +1,10 @@
 <template>
     <div class="mb-5">
 
+        <!-- Personal info -->
+
+        <personal-info :user="this.user"/>
+
         <!-- Personal page for client user -->
 
         <client v-if="this.user.role === 'client'"
@@ -31,10 +35,11 @@
 import Client from "./user/client";
 import Doctor from "./user/doctor";
 import Admin from "./user/admin";
+import PersonalInfo from "./user/personalInfo";
 
 export default {
     name: "personal",
-    components: {Admin, Doctor, Client},
+    components: {PersonalInfo, Admin, Doctor, Client},
     data() {
         return {
             user: '',
