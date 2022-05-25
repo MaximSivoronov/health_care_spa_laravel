@@ -94,6 +94,11 @@ __webpack_require__.r(__webpack_exports__);
         name: 'user.personal'
       });
     }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      return this.user.name && this.user.email && this.user.role;
+    }
   }
 });
 
@@ -708,7 +713,7 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-primary appointment-button",
-              attrs: { type: "submit" },
+              attrs: { disabled: !_vm.isDisabled, type: "submit" },
               on: {
                 click: function ($event) {
                   $event.preventDefault()

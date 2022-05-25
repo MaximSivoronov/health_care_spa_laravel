@@ -93,6 +93,11 @@ __webpack_require__.r(__webpack_exports__);
         name: 'user.login'
       });
     }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      return this.name && this.email && this.password && this.password_confirmation;
+    }
   }
 });
 
@@ -740,7 +745,7 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-primary register-button",
-              attrs: { type: "submit" },
+              attrs: { disabled: !_vm.isDisabled, type: "submit" },
               on: {
                 click: function ($event) {
                   $event.preventDefault()

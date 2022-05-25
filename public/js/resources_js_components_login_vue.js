@@ -77,6 +77,11 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      return this.email && this.password;
+    }
   }
 });
 
@@ -660,7 +665,7 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-primary login-button",
-              attrs: { type: "submit" },
+              attrs: { disabled: !_vm.isDisabled, type: "submit" },
               on: {
                 click: function ($event) {
                   $event.preventDefault()

@@ -109,6 +109,15 @@ __webpack_require__.r(__webpack_exports__);
         name: 'user.personal'
       });
     }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      if (this.user.role === 'doctor') {
+        return this.appointment.specialization && this.appointment.beginning_time && this.appointment.ending_time;
+      } else {
+        return this.appointment.specialization && this.appointment.beginning_time && this.appointment.ending_time && this.appointment.doctor_id;
+      }
+    }
   }
 });
 
@@ -757,7 +766,7 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-primary appointment-button",
-              attrs: { type: "submit" },
+              attrs: { disabled: !_vm.isDisabled, type: "submit" },
               on: {
                 click: function ($event) {
                   $event.preventDefault()

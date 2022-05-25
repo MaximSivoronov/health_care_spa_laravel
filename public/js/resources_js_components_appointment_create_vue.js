@@ -61,6 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "create",
   data: function data() {
@@ -99,6 +100,15 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'user.personal'
       });
+    }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      if (this.user.role === 'doctor') {
+        return this.specialization && this.beginning_time && this.ending_time;
+      } else {
+        return this.specialization && this.beginning_time && this.ending_time && this.doctor_id;
+      }
     }
   }
 });
@@ -740,7 +750,7 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-primary appointment-button",
-              attrs: { type: "submit" },
+              attrs: { disabled: !_vm.isDisabled, type: "submit" },
               on: {
                 click: function ($event) {
                   $event.preventDefault()

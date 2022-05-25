@@ -39,7 +39,8 @@
                 <!-- Submit button -->
 
                 <div class="m-auto text-center">
-                    <button @click.prevent="createAppointment" type="submit" class="btn btn-primary appointment-button">
+                    <button :disabled="!isDisabled" @click.prevent="createAppointment" type="submit"
+                            class="btn btn-primary appointment-button">
                         Add appointment
                     </button>
                 </div>
@@ -88,6 +89,17 @@ export default {
         redirectToPersonal() {
             this.$router.push({name: 'user.personal'});
         },
+    },
+
+    computed: {
+        isDisabled() {
+            if (this.user.role === 'doctor') {
+                return this.specialization && this.beginning_time && this.ending_time;
+            }
+            else {
+                return this.specialization && this.beginning_time && this.ending_time && this.doctor_id;
+            }
+        }
     },
 }
 </script>

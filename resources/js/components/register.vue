@@ -42,7 +42,7 @@
                 <!-- Submit button -->
 
                 <div class="m-auto text-center">
-                    <button @click.prevent="register" type="submit" class="btn btn-primary register-button">Sign up
+                    <button :disabled="!isDisabled" @click.prevent="register" type="submit" class="btn btn-primary register-button">Sign up
                     </button>
                 </div>
             </form>
@@ -79,6 +79,12 @@ export default {
         redirectToLogin() {
             this.$router.push({name: 'user.login'});
         },
+    },
+
+    computed: {
+        isDisabled() {
+            return this.name && this.email && this.password && this.password_confirmation;
+        }
     },
 }
 </script>
